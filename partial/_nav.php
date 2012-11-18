@@ -4,12 +4,15 @@
 <a href="" class="btn span11">Games</a>
 <a href="" class="btn span11">Tournaments</a>
 <?php if ($u != NULL) { ?>
+  <?php if ($u->role = USER) { ?>
 <!-- User logged in -->
-<?php if ($u->role = USER) { ?>
+<hr>
+<a href="" class="btn span11">My Tournaments</a>
 
-<?php } ?>
+  <?php } ?>
+  <?php if ($u->role = ADMIN) { ?>
 <!-- Admin logged in -->
-<?php if ($u->role = ADMIN) { ?>
+<hr>
 
-<?php } ?>
+  <?php } ?>
 <?php } ?>

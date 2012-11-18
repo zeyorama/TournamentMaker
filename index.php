@@ -33,7 +33,7 @@
       <div class="row-fluid">
         <!-- HEADER -->
         <div class="span12">
-          <p class="">HEADER</p>
+          <center>HEADER</center>
           <hr>
           <div class="row-fluid">
             <!-- Login/Logout/Register -->
@@ -45,7 +45,7 @@
                 <?php
                   if ($u == NULL) {
                 ?>
-                <a href="index.php?f=user&s=login" class="btn">Login</a> | <a href="index.php?f=user&s=register" class="btn">Register</a>
+                <a href="index.php?f=user&s=login" class="btn">Login</a> <a href="index.php?f=user&s=register" class="btn">Register</a>
                 <?php
                   } else {
                 ?>
@@ -71,6 +71,14 @@
                 switch($_GET['f']) {
                   case 'user':
                     include 'partial/_user.php';
+                    break;
+
+                  case 'tournament':
+                    include 'partial/_tour.php';
+                    break;
+
+                  case 'setting':
+                    include 'partial/_setting.php';
                     break;
 
                   default:

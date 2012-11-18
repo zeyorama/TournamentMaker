@@ -3,8 +3,12 @@
    * @author Frank Kevin Zey
    */
 
+  # include 'core/'
   include 'core/constants.php';
   
+  #include 'classes/'
+  include 'classes/user.php';
+
   /**
    * Returns the user object of the current logged in user.
    *

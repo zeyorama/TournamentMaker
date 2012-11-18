@@ -2,10 +2,14 @@
   /**
    * @author Frank Kevin Zey
    */
+
+  include '../../epic.php';
 ?>
 <?php
 
-  unset($_SESSION['user']);
+  session_unset(session_id());
+  session_destroy();
+  
   header("Location: ../../");
 
 ?>
