@@ -1,18 +1,27 @@
-<a href="index.php" class="btn span12">Home</a>
-<hr>
-<!-- Not logged in -->
-<a href="" class="btn span11">Games</a>
-<a href="" class="btn span11">Tournaments</a>
-<?php if ($u != NULL) { ?>
-  <?php if ($u->role = USER) { ?>
-<!-- User logged in -->
-<hr>
-<a href="" class="btn span11">My Tournaments</a>
-
-  <?php } ?>
-  <?php if ($u->role = ADMIN) { ?>
-<!-- Admin logged in -->
-<hr>
-
-  <?php } ?>
-<?php } ?>
+<nav class="container-fluid">
+  <div class="span12">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header">Navigation</li>
+          <!-- Not logged in -->
+          <li><a href="index.php">Home</a></li>
+          <li><a href="">Games</a></li>
+          <li><a href="">Tournaments</a></li>
+          <hr>
+          <?php if ($u != NULL) { ?>
+          <!-- Looged in -->
+          <li class="nav-header">My SITENAME</li>
+          <li><a href="">My Tournaments</a></li>
+          <hr>
+            <?php if ($u->role == ADMIN) { ?>
+          <!-- Admin logged in -->
+          <li class="nav-header">Administration</li>
+          <li><a href="">Admin Area</a></li>
+            <?php } ?>
+          <?php } ?>
+          <hr>
+          <li><a href="index.php?f=main&s=impress">Imprint</a></li>
+        </ul>
+    </div>
+  </div>
+</nav>

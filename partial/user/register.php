@@ -4,12 +4,18 @@
    */
 ?>
 <div class="box">
-  <p>Login</p>
-  <form class="form-horizontal" action="action/user/login.php" method="POST">
+  <p>Register</p>
+  <form class="form-horizontal" action="action/user/register.php" method="POST">
     <div class="control-group">
-      <label class="control-label" for="inputEmail">Username</label>
+      <label class="control-label" for="inputUsername">Username</label>
       <div class="controls">
         <input type="text" id="inputUsername" placeholder="Username" name="user_username">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Email</label>
+      <div class="controls">
+        <input type="email" id="inputUsername" placeholder="Email" name="user_email">
       </div>
     </div>
     <div class="control-group">
@@ -20,7 +26,7 @@
     </div>
     <div class="control-group">
       <div class="controls">
-        <button type="submit" class="btn">Sign in</button>
+        <button type="submit" class="btn">Sign up</button>
       </div>
     </div>
   </form>

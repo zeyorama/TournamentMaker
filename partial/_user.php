@@ -10,12 +10,20 @@
         include 'user/login.php';
         break;
 
+      case 'register':
+        include 'user/register.php';
+        break;
+
+      case 'profile':
+        include 'user/profile.php';
+        break;
+
       default:
-        include 'user/default.php';
+        include '_index.php';
         break;
     }
   } else {
-    include 'user/default.php';
+    include '_index.php';
   }
 
 ?>

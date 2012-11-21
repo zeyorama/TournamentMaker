@@ -1,3 +1,8 @@
 body.tmwb_main {
   font-size: 0.8em;
 }
+
+table tr th {
+  text-align: left;
+  vertical-align: top;
+}

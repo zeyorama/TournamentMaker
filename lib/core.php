@@ -16,7 +16,7 @@
    */
   function current_user() {
     if (isset($_SESSION['user'])) {
-      return  unserialize($_SESSION['user']);
+      return unserialize($_SESSION['user']);
     }
 
     return NULL;

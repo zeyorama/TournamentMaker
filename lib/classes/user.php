@@ -2,7 +2,7 @@
   
   /*************************** includes **************************/
   
-
+  
   /**
    * @package lib.classes
    *
@@ -20,7 +20,7 @@
 
 
     /************************* variables *************************/
-    public $id;
+    private $id;
     public $username;
     public $email;
     public $role;
@@ -41,16 +41,61 @@
      * @return Returns true if user is saved in DB, otherwise errorcode
      */
     public static function login($username, $password) {
-      $pass = md5($password);
-
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
-      if ($db->errno) return 10001;
+      if ($db->errno)
+        return 10001;
 
       $u = new User();
 
-      if (!($res = $db->query("SELECT * FROM `".USER_TABLE_NAME."` WHERE `username` LIKE '$username' AND `pass` LIKE '$pass' LIMIT 1;"))) return 10002;
+      if (!($res = $db->query("SELECT * FROM `_user` WHERE `username` LIKE '".$username."' AND `pass` LIKE md5('".$password."') LIMIT 1;")))
+        return 10002;
 
+      if ($res->num_rows < 1)
+        return 10003;
+      
+      $user = $res->fetch_assoc();
+
+      $u->id = $user['_id'];
+      $u->username = $user['username'];
+      $u->email = $user['email'];
+      $u->role = $user['role'];
+      $u->created_at = $user['created_at'];
+      $u->updated_at = $user['updated_at'];
+      $u->last_signin = date("Y-m-d H:i:s");
+
+      $_SESSION['user'] = serialize($u);
+
+      $db->query("UPDATE `_user` SET `last_signin`='{$u->last_signin}' WHERE `_id`={$u->id};");
+      $db->close();
+
+      return 10000;
+    }
+
+    public function getID() {
+      return $this->id;
+    }
+
+    public function updateUser($keyValueNew) {
+      $db->query("UPDATE `_user` SET `last_signin`='{$u->last_signin}' WHERE `_id`={$u->id};");
+      $db->close();
+
+    }
+
+    public static function getUser($id) {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      $u = new User();
+
+      if (!($res = $db->query("SELECT * FROM `_user` WHERE `_id` LIKE '".$id."' LIMIT 1;")))
+        return 10002;
+
+      if ($res->num_rows < 1)
+        return 10004;
+      
       $user = $res->fetch_assoc();
 
       $u->id = $user['_id'];
@@ -61,9 +106,7 @@
       $u->updated_at = $user['updated_at'];
       $u->last_signin = $user['last_signin'];
 
-      $_SESSION['user'] = serialize($u);
-
-      return true;
+      return $u;
     }
 
     /**
@@ -76,15 +119,17 @@
      * @return true if new user is saved, otherwise errorcode
      */
     public static function register($username, $email, $password) {
-      $pass = md5($password);
-
-      $query = "INSERT INTO ".USER_TABLE_NAME."(username, email, pass) VALUES($username, $email, $pass);";
+      $query = "INSERT INTO `_user`(`username`, `email`, `pass`) VALUES('".$username."', '".$email."', md5('".$password."'));";
 
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
-      if ($db->errno) return 10001;
+      if ($db->errno)
+        return 10001;
 
-      return $db->query($query);
+      if ($db->query($query))
+        return 0;
+
+      return 10098;
     }
 
   }

@@ -19,6 +19,7 @@
 <!DOCTYPE html>
 <html lang="de">
   <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title></title>
     <!-- Stylesheets -->
@@ -27,20 +28,21 @@
     <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
     <!-- JavaScripts -->
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
   </head>
   <body class="tmwb_main">
     <div class="container">
       <div class="row-fluid">
         <!-- HEADER -->
         <div class="span12">
-          <center>HEADER</center>
+          <center>SITENAME</center>
           <hr>
           <div class="row-fluid">
             <!-- Login/Logout/Register -->
-            <div class="span4">
-              Logged in as: <?php echo ($u = current_user())==NULL? "Guest" : $u->username; ?>
+            <div class="span3">
+              Logged in as: <?php echo $u==NULL ? "Guest" : "<a href='index.php?f=user&s=profile'>".$u->username."</a>"; ?>
             </div>
-            <div class="span4 offset4">
+            <div class="span3 pull-right">
               <p class="pull-right">
                 <?php
                   if ($u == NULL) {
@@ -61,11 +63,63 @@
       <div class="container-fluid">
         <div class="row-fluid">
           <!-- left NAVbar -->
-          <div class="span2">
+          <div class="span3">
             <?php include 'partial/_nav.php'; ?>
           </div>
-          <div class="span10">
-            <?php
+          <div class="span9">
+            <div class="row-fluid">
+<?php if (isset($_GET['e'])) { ?>
+              <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+<?php
+            switch ($_GET['e']) {
+              case 10001:
+              case 10002:
+                echo 'Database error, please retry.';
+                break;
+              case 10003:
+                echo 'Username or password wrong, please retry.';
+                break;
+              case 10098:
+                echo 'Database error while registration, please retry!';
+                break;
+              case 10099:
+                echo 'Your registration informations are wrong, please retry!';
+                break;
+            }
+?>                
+              </div>
+<?php } ?>
+<?php if (isset($_GET['n'])) { ?>
+              <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+<?php
+            switch ($_GET['n']) {
+              case 10099:
+                # code...
+                break;
+            }
+?>
+              </div>
+<?php } ?>
+<?php if (isset($_GET['confirm'])) { ?>
+              <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+<?php
+            switch ($_GET['confirm']) {
+              case 'user_registration':
+                echo 'Registered successfully, please log in.';
+                break;
+
+              case 'user_login':
+                echo 'Successfully logged in, good luck have fun.';
+                break;
+            }
+?>
+              </div>
+<?php } ?>
+              <div class="span12">
+<?php
               if (isset($_GET['f'])) {
 
                 switch($_GET['f']) {
@@ -81,6 +135,10 @@
                     include 'partial/_setting.php';
                     break;
 
+                  case 'main':
+                    include 'partial/_main.php';
+                    break;
+
                   default:
                     include 'partial/_index.php';
                     break;
@@ -89,11 +147,13 @@
               } else {
                 include 'partial/_index.php';
               }
-
-            ?>
+?>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <footer> </footer>
   </body>
 </html>
