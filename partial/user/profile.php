@@ -70,15 +70,18 @@
       <div class="box">
         <li class="nav-header">Tournaments</li>
         <p>
+          <h6>Upcoming Tournaments</h6>
 <?php
   # Lists of Tournaments
 ?>
+          ...
         </p>
         <p>
           <h6>Finished Tournaments</h6>
 <?php
   # List of finished Tournaments
 ?>
+          ...
         </p>
       </div>
     </div>
