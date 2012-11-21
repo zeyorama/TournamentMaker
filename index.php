@@ -33,12 +33,16 @@
     <div class="container">
       <div class="row">
         <!-- HEADER -->
-        <div class="span12">
+        <div class="span12" style="letter-spacing: 2px;">
           <center>
             <h1>TournamentMaker</h1>
           </center>
           <div class="row">
-            <div class="span2 offset3"><font style="font-family: monospace;">Establish your events</font></div>
+            <div class="span3 offset3">
+              <font style="font-family: monospace; border-bottom: 1px dotted black;">
+                We establish your events
+              </font>
+            </div>
           </div>
           <hr>
           <div class="row-fluid">
@@ -68,7 +72,9 @@
         <div class="row-fluid">
           <!-- left NAVbar -->
           <div class="span3">
-            <?php include 'partial/_nav.php'; ?>
+            <?php include 'partial/main/nav.php'; ?>
+            <hr>
+            <?php include 'partial/main/news.php'; ?>
           </div>
           <div class="span9">
             <?php
