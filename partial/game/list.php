@@ -48,6 +48,11 @@
         <td><?php echo $game->release; ?></td>
         <td>
           <ul class="nav nav-pills">
+            <?php if ($u->hasGame($game->getID())) {?>
+            <li class="disabled"><a href="action/user/delGame.php?id=<?php echo $game->getID(); ?>">Remove game from my list</a></li>
+            <?php } else {?>
+            <li><a href="action/user/addGame.php?id=<?php echo $game->getID(); ?>">Add game to my list</a></li>
+            <?php } ?>
 <?php if ($u->isAdmin()) { ?>
             <li><a href="action/game/delete.php?id=<?php echo $game->getID(); ?>">Remove game</a></li>
             <!-- Additional actions for admin only -->            

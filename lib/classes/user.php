@@ -95,7 +95,11 @@
     }
 
     public function isAdmin() {
-      return $this->role == 1;
+      return $this->role == ADMIN;
+    }
+
+    public function hasGame() {
+      return false;
     }
 
     public static function getUser($id) {

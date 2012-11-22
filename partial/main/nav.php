@@ -8,10 +8,9 @@
       <hr>
       <?php if ($u != NULL) { ?>
       <!-- Looged in -->
-      <li class="nav-header">My SITENAME</li>
       <li><a href="">My Tournaments</a></li>
       <hr>
-        <?php if ($u->role == ADMIN) { ?>
+        <?php if ($u->isAdmin()) { ?>
       <!-- Admin logged in -->
       <li class="nav-header">Administration</li>
       <li><a href="index.php">Settings</a></li>
