@@ -24,6 +24,9 @@
       10003 : login failed, username/password wrong
       10004 : no user with $(id)
 
+      10011 : query error to look for games this user has
+      10012 : this user has no games
+
       10098 : registration failed, query wrong or wrong values
 
      */
@@ -98,7 +101,43 @@
       return $this->role == ADMIN;
     }
 
-    public function hasGame() {
+    public function getGames() {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("SELECT * FROM `_user_game` WHERE `user_id`='".$this->id."';")))
+        return 10011;
+
+      if ($res->num_rows < 1)
+        return 100012;
+
+      $games = array();
+      $i = 0;
+
+      while ($r = $res->fetch_assoc()) {
+        if (!($g = Game::getGame($r['game_id']))) continue;
+
+        $games[$i++] = $g;
+      }
+
+      if (count($games) < 1) return 10012;
+
+      return $g;
+    }
+
+    public function hasGame($id) {
+      switch ($games = $this->getGames()) {
+        case 10001:
+        case 10011:
+        case 10012: return false;
+      }
+
+      foreach ($games as $g) {
+        if ($g->getID() == $id) return true;
+      }
+
       return false;
     }
 

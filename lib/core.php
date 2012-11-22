@@ -7,8 +7,8 @@
   include 'core/constants.php';
   
   #include 'classes/'
-  include 'classes/user.php';
   include 'classes/game.php';
+  include 'classes/user.php';
 
   /**
    * Returns the user object of the current logged in user.
