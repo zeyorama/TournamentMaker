@@ -25,9 +25,10 @@
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/formate.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" media="screen">
     <!-- JavaScripts -->
+    <script type="text/javascript" src="js/jquery.183.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
   </head>
   <body class="tmwb_main">
     <div class="container">
@@ -77,45 +78,53 @@
             <?php include 'partial/main/news.php'; ?>
           </div>
           <div class="span9">
+            <div class="row-fluid">
             <?php
               # alerts
               include 'partial/_alert.php';
             ?>
-            <div class="span12">
+            </div>
+            <div class="row-fluid">
+              <div class="span12">
 <?php
-            if (isset($_GET['f'])) {
+              if (isset($_GET['f'])) {
 
-              switch($_GET['f']) {
-                case 'user':
-                  include 'partial/_user.php';
-                  break;
+                switch($_GET['f']) {
+                  case 'user':
+                    include 'partial/_user.php';
+                    break;
 
-                case 'tournament':
-                  include 'partial/_tour.php';
-                  break;
+                  case 'tournament':
+                    include 'partial/_tour.php';
+                    break;
 
-                case 'setting':
-                  include 'partial/_setting.php';
-                  break;
+                  case 'setting':
+                    include 'partial/_setting.php';
+                    break;
 
-                case 'main':
-                  include 'partial/_main.php';
-                  break;
+                  case 'game':
+                    include 'partial/_game.php';
+                    break;
 
-                default:
-                  include 'partial/_index.php';
-                  break;
+                  case 'main':
+                    include 'partial/_main.php';
+                    break;
+
+                  default:
+                    include 'partial/_index.php';
+                    break;
+                }
+
+              } else {
+                include 'partial/_index.php';
               }
-
-            } else {
-              include 'partial/_index.php';
-            }
 ?>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <footer> </footer>
+    <footer><center>TournamentMaker<br>&copy; by Frank Kevin Zey 2012</center></footer>
   </body>
 </html>

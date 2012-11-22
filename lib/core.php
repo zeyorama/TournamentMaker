@@ -8,6 +8,7 @@
   
   #include 'classes/'
   include 'classes/user.php';
+  include 'classes/game.php';
 
   /**
    * Returns the user object of the current logged in user.

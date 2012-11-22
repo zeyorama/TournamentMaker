@@ -3,7 +3,7 @@
       <li class="nav-header">Navigation</li>
       <!-- Not logged in -->
       <li><a href="index.php">Home</a></li>
-      <li><a href="">Games</a></li>
+      <li><a href="index.php?f=game&s=list">Games</a></li>
       <li><a href="">Tournaments</a></li>
       <hr>
       <?php if ($u != NULL) { ?>
@@ -14,7 +14,7 @@
         <?php if ($u->role == ADMIN) { ?>
       <!-- Admin logged in -->
       <li class="nav-header">Administration</li>
-      <li><a href="">Admin Area</a></li>
+      <li><a href="index.php">Settings</a></li>
       <hr>
         <?php } ?>
       <?php } ?>

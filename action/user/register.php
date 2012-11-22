@@ -17,7 +17,7 @@
 
   $u = User::register($username, $email, $password);
 
-  if ($u != 0) {
+  if ($u != 10000) {
     header("Location: ../../index.php?f=user&s=register&e=$u");
     exit();
 

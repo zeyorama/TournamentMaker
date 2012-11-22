@@ -16,6 +16,18 @@
    */
   final class User {
 
+    /*
+      errcodes: 100xx
+      10000 : no error
+      10001 : no db connection
+      10002 : login query wrong
+      10003 : login failed, username/password wrong
+      10004 : no user with $(id)
+
+      10098 : registration failed, query wrong or wrong values
+
+     */
+
     /************************* constants *************************/
 
 
@@ -82,13 +94,15 @@
 
     }
 
+    public function isAdmin() {
+      return $this->role == 1;
+    }
+
     public static function getUser($id) {
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
       if ($db->errno)
         return 10001;
-
-      $u = new User();
 
       if (!($res = $db->query("SELECT * FROM `_user` WHERE `_id` LIKE '".$id."' LIMIT 1;")))
         return 10002;
@@ -96,6 +110,8 @@
       if ($res->num_rows < 1)
         return 10004;
       
+      $u = new User();
+
       $user = $res->fetch_assoc();
 
       $u->id = $user['_id'];
@@ -127,7 +143,7 @@
         return 10001;
 
       if ($db->query($query))
-        return 0;
+        return 10000;
 
       return 10098;
     }

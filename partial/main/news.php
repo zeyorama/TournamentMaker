@@ -6,5 +6,7 @@
     
 
 ?>
-<li class="nav-header">News</li>
-Currently no new news available
+<div class="well">
+  <li class="nav-header">News</li>
+  Currently no new news available
+</div>
