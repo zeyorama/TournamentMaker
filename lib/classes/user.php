@@ -103,6 +103,18 @@
       return $this->role == ADMIN;
     }
 
+    public function addGame($id) {
+
+
+      return 10000;
+    }
+
+    public function delGame($id) {
+
+      
+      return 10000;
+    }
+
     public function getGames() {
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
