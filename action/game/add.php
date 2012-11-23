@@ -5,6 +5,11 @@
 
   include '../../epic.php';
 
+  if ($u != NULL) {
+    header("Location: ../../index.php");
+    exit();
+  }
+
   $b = Game::newGame($_POST);
 
   switch ($b) {

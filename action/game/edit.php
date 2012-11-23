@@ -5,6 +5,16 @@
 
   include '../../epic.php';
 
+  if ($u != NULL) {
+    header("Location: ../../index.php");
+    exit();
+  }
+
+  if (!$u->isAdmin()) {
+    header("Location: ../../index.php");
+    exit();
+  }
+
   $e = Game::getGame($_POST['id'])->update($_POST['name'],$_POST['release'],$_POST['usk'],$_POST['description']);
 
   if ($e == 10100) {

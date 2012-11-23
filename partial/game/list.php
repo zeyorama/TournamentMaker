@@ -1,11 +1,13 @@
 <div class="row-fluid">
   <div class="span12 well">
+    <?php if ($u != NULL) { ?>
     <div class="box">
       <div><strong>Global options</strong></div>
       <ul class="nav nav-pills">
         <li><a href="index.php?f=game&s=add">Add game</a></li>
       </ul>
     </div>
+    <?php } ?>
   </div>
 </div>
 <div class="row-fluid">
@@ -48,6 +50,7 @@
         <td><?php echo $game->release; ?></td>
         <td>
           <ul class="nav nav-pills">
+<?php if ($u != NULL) { ?>
             <?php if ($u->hasGame($game->getID())) {?>
             <li class="disabled"><a href="action/user/delGame.php?id=<?php echo $game->getID(); ?>">Remove game from my list</a></li>
             <?php } else {?>
@@ -59,6 +62,7 @@
             <!-- Additional actions for admin only -->            
 <?php } ?>
             <li><a href="index.php?f=game&s=review&id=<?php echo $game->getID(); ?>">Review game</a></li>
+<?php } ?>
           </ul>
         </td>
       </tr>
