@@ -43,6 +43,8 @@
     public $updated_at;
     public $last_signin;
 
+    private $games = NULL;
+
     /************************ constructors ***********************/
     private function __construct() {}
 
@@ -128,13 +130,15 @@
     }
 
     public function hasGame($id) {
-      switch ($games = $this->getGames()) {
-        case 10001:
-        case 10011:
-        case 10012: return false;
+      if ($this->games == NULL) {
+        switch ($this->games = $this->getGames()) {
+          case 10001:
+          case 10011:
+          case 10012: return false;
+        }
       }
 
-      foreach ($games as $g) {
+      foreach ($this->games as $g) {
         if ($g->getID() == $id) return true;
       }
 
