@@ -26,6 +26,8 @@
 
       10011 : query error to look for games this user has
       10012 : this user has no games
+      10011 : query to delete game of user failed
+      10012 : query to insert game of user failed
 
       10098 : registration failed, query wrong or wrong values
 
@@ -104,14 +106,26 @@
     }
 
     public function addGame($id) {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("INSERT INTO `_user_game`() VALUES('".$this->id."');")))
+        return 10014;
 
       return 10000;
     }
 
     public function delGame($id) {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
-      
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("DELETE FROM `_user_game` WHERE `user_id`='".$this->id."';")))
+        return 10013;
+
       return 10000;
     }
 
