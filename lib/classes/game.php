@@ -25,6 +25,7 @@
       10104 : wrong id given
       10105 : select game query failed
       10106 : no games found
+      10107 : update query failed
 
      */
 
@@ -107,6 +108,19 @@
       $g->updated_at = $game['updated_at'];
 
       return $g;
+    }
+
+    public function update($name, $release, $usk, $desc) {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno) return 10101;
+
+      $query = "UPDATE `_game` SET `_name`='$name', `_release`='$release', `_usk`='$usk', `_description`='$desc' WHERE `_id`='{$this->id}';";
+
+      if ($db->query($query)) return 10100;
+
+      return 10107;
+
     }
 
     /**

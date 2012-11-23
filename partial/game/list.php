@@ -55,6 +55,7 @@
             <?php } ?>
 <?php if ($u->isAdmin()) { ?>
             <li><a href="action/game/delete.php?id=<?php echo $game->getID(); ?>">Remove game</a></li>
+            <li><a href="index.php?f=game&s=edit&id=<?php echo $game->getID(); ?>">Edit game</a></li>
             <!-- Additional actions for admin only -->            
 <?php } ?>
             <li><a href="index.php?f=game&s=review&id=<?php echo $game->getID(); ?>">Review game</a></li>

@@ -4,7 +4,7 @@
    */
 
   if (!isset($_GET['s'])) {
-    include 'partial/_index.php';
+    include 'partial/game/list.php';
     exit();
 
   }
@@ -21,9 +21,17 @@
     case 'delete':
       include 'partial/game/delete.php';
       break;
+      
+    case 'edit':
+      include 'partial/game/edit.php';
+      break;
+      
+    case 'review':
+      include 'partial/game/review.php';
+      break;
 
     default:
-      include 'partial/_index.php';
+      include 'partial/game/list.php';
       break;
   }
 

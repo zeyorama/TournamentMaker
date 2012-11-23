@@ -22,4 +22,8 @@
 
     return NULL;
   }
+
+  function setValue($v) {
+    echo "value='$v'";
+  }
 ?>

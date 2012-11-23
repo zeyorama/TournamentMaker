@@ -81,7 +81,8 @@
 
       $_SESSION['user'] = serialize($u);
 
-      $db->query("UPDATE `_user` SET `last_signin`='{$u->last_signin}' WHERE `_id`={$u->id};");
+      $u->updateLastSignIn($db, date("Y-m-d H:i:s"));
+
       $db->close();
 
       return 10000;
@@ -91,10 +92,9 @@
       return $this->id;
     }
 
-    public function updateUser($keyValueNew) {
-      $db->query("UPDATE `_user` SET `last_signin`='{$u->last_signin}' WHERE `_id`={$u->id};");
-      $db->close();
-
+    public function updateLastSignIn($db, $last_signin) {
+      $db->query("UPDATE `_user` SET `last_signin`='$last_signin', `updated_at`='$last_signin' WHERE `_id`={$this->id};");
+      
     }
 
     public function isAdmin() {

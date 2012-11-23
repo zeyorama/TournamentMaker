@@ -32,6 +32,9 @@
               case 10106:
                 echo 'No games found.';
                 break;
+              case 10107:
+                echo 'Update failed, please try again or contact an admin.';
+                break;
             }
 ?>                
               </div>
@@ -63,6 +66,10 @@
 
               case 'game_add':
                 echo 'New game successfully added.';
+                break;
+
+              case 'game_edit':
+                echo 'Game successfully edited.';
                 break;
             }
 ?>
