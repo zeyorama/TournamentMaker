@@ -1,14 +1,12 @@
 <div class="row-fluid">
+<?php if ($u != NULL) { ?>
   <div class="span12 well">
-    <?php if ($u != NULL) { ?>
-    <div class="box">
-      <div><strong>Global options</strong></div>
-      <ul class="nav nav-pills">
-        <li><a href="index.php?f=game&s=add">Add game</a></li>
-      </ul>
-    </div>
-    <?php } ?>
+    <div><strong>Global actions</strong></div>
+    <ul class="nav nav-pills">
+      <li><a href="index.php?f=game&s=add">Add game</a></li>
+    </ul>
   </div>
+<?php } ?>
 </div>
 <div class="row-fluid">
   <div class="span12 well">
@@ -56,12 +54,14 @@
             <?php } else {?>
             <li><a href="action/user/addGame.php?id=<?php echo $game->getID(); ?>">Add game to my list</a></li>
             <?php } ?>
-<?php if ($u->isAdmin()) { ?>
+<?php   if ($u->isAdmin()) { ?>
             <li><a href="action/game/delete.php?id=<?php echo $game->getID(); ?>">Remove game</a></li>
             <li><a href="index.php?f=game&s=edit&id=<?php echo $game->getID(); ?>">Edit game</a></li>
             <!-- Additional actions for admin only -->            
-<?php } ?>
+<?php   } ?>
+<?php   if (!$game->isReviewedByUser($u->getID())) { ?>
             <li><a href="index.php?f=game&s=review&id=<?php echo $game->getID(); ?>">Review game</a></li>
+<?php   } ?>
 <?php } ?>
           </ul>
         </td>

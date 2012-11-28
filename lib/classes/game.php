@@ -27,6 +27,10 @@
       10106 : no games found
       10107 : update query failed
 
+      10120 : user already reviewed
+      10121 : insert review for game query failed
+      10122 : isreviewed query failed
+      
      */
 
     /************************* constants *************************/
@@ -40,6 +44,8 @@
     public $usk;
     public $created_at;
     public $updated_at;
+
+    private $reviewTable = '_game_review';
 
     /************************ constructors ***********************/
     private function __construct() {}
@@ -159,8 +165,59 @@
       return $games;     
     }
 
+    /**
+     * Gives the ID of this user
+     *
+     * @return Returns the ID of this user
+     */
     public function getID() {
       return $this->id;
+    }
+
+    /**
+     * Sets a review by user
+     *
+     * @param $uid The ID of the user
+     * @param $rate The given rate by user
+     * @param $comment The comment given by user
+     *
+     * @return Returns true if successfully reviewed, otherwise errorcode
+     */
+    public function setReview($uid, $rate, $comment) {
+      if ($this->isReviewdByUser($uid)) return 10120;
+
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno) return 10101;
+
+      $query = "INSERT INTO `_game_review`(`user_id`, `game_id`, `_rate`, `_comment`) VALUES('$uid','{$this->id}','$rate','$comment');";
+
+      if (!$db->query($query)) return 10121;
+
+      return true;
+    }
+
+    /**
+     * Checks, if user has already reviewed this game
+     *
+     * @param $uid The ID of user
+     *
+     * @return true if already reviewd or error occured, otherwise false
+     */
+    public function isReviewedByUser($uid = -1) {
+      if ($uid == -1) return false;
+
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno) return 10101;
+
+      $query = "SELECT * FROM `_game_review` WHERE `user_id`='$uid' AND `game_id`='{$this->id}';";
+
+      if (!($res = $db->query($query))) return 10122;
+
+      if ($res->num_rows < 1) return false;
+
+      return true;
     }
 
   }

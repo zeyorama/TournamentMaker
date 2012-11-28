@@ -15,6 +15,9 @@
 
   define("USER_TABLE_NAME", "_user");
 
+  # game specific constants
+  define("GAME_TABLE_NAME", "_game");
+
   # tournament specific constants
   define("TOUR_TABLE_NAME", "_tour");
 

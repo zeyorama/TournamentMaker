@@ -160,7 +160,7 @@
         switch ($this->games = $this->getGames()) {
           case 10001:
           case 10011:
-          case 10012: return false;
+          case 10012: $this->games = NULL; return false;
         }
       }
 
