@@ -4,7 +4,7 @@
    */
 ?>
 <div class="box">
-  <p>Register</p>
+  <li class="nav-header">Register</li>
   <form class="form-horizontal" action="action/user/register.php" method="POST">
     <div class="control-group">
       <label class="control-label" for="inputUsername">Username</label>

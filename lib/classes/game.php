@@ -30,6 +30,8 @@
       10120 : user already reviewed
       10121 : insert review for game query failed
       10122 : isreviewed query failed
+
+      10131 : delete query failed
       
      */
 
@@ -114,6 +116,18 @@
       $g->updated_at = $game['updated_at'];
 
       return $g;
+    }
+
+    public static function delete($id) {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno) return 10101;
+
+      $query = "DELETE FROM `_game` WHERE `_id`='$id';";
+
+      if ($db->query($query)) return 10100;
+
+      return 10131;
     }
 
     public function update($name, $release, $usk, $desc) {

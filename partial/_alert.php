@@ -29,6 +29,7 @@
               case 10105:
               case 10121:
               case 10122:
+              case 10131:
                 echo 'Database error, please retry!';
                 break;
               case 10102:
@@ -75,8 +76,20 @@
                 echo 'Successfully logged in, good luck have fun.';
                 break;
 
+              case 'user_game_add':
+                echo 'Game successfully added to my list.';
+                break;
+
+              case 'user_game_del':
+                echo 'Game successfully removed from my list.';
+                break;
+
               case 'game_add':
                 echo 'New game successfully added.';
+                break;
+
+              case 'game_del':
+                echo 'Game successfully removed.';
                 break;
 
               case 'game_edit':

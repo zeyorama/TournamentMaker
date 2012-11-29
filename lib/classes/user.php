@@ -29,6 +29,7 @@
       10011 : query to delete game of user failed
       10012 : query to insert game of user failed
       10013 : user already has game
+      10014 : user doesn't have game
 
       10098 : registration failed, query wrong or wrong values
 
@@ -124,8 +125,10 @@
       if ($db->errno)
         return 10001;
 
-      if (!($res = $db->query("DELETE FROM `_user_game` WHERE `user_id`='".$this->id."';")))
+      if (!($res = $db->query("DELETE FROM `_user_game` WHERE `user_id`='".$this->id."' AND `game_id`='".$id."';")))
         return 10013;
+
+      $this->games = NULL;
 
       return 10000;
     }

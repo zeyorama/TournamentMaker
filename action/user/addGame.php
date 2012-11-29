@@ -20,7 +20,7 @@
   $e = $u->addGame($_GET['id']);
 
   if ($e == 10000) {
-    header("Location: ../../index.php?f=game&s=list&confirm=game_edit");
+    header("Location: ../../index.php?f=game&s=list&confirm=user_game_add");
     exit();
   
   }

@@ -18,6 +18,10 @@
         include 'user/profile.php';
         break;
 
+      case 'addGame':
+        include 'user/addGame.php';
+        break;
+
       default:
         include '_index.php';
         break;
