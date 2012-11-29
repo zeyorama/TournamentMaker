@@ -26,11 +26,12 @@
 
       10011 : query error to look for games this user has
       10012 : this user has no games
-      10011 : query to delete game of user failed
-      10012 : query to insert game of user failed
       10013 : user already has game
       10014 : user doesn't have game
-
+      10015 : query to delete game of user failed
+      10016 : query to insert game of user failed
+      10017 : user doesn't have any games
+      
       10098 : registration failed, query wrong or wrong values
 
      */
@@ -114,7 +115,7 @@
         return 10001;
 
       if (!($res = $db->query("INSERT INTO `_user_game`(`user_id`,`game_id`) VALUES('".$this->id."','$game_id');")))
-        return 10014;
+        return 10016;
 
       return 10000;
     }
@@ -126,7 +127,7 @@
         return 10001;
 
       if (!($res = $db->query("DELETE FROM `_user_game` WHERE `user_id`='".$this->id."' AND `game_id`='".$id."';")))
-        return 10013;
+        return 10016;
 
       $this->games = NULL;
 
@@ -145,7 +146,7 @@
         return 10011;
 
       if ($res->num_rows < 1)
-        return 10012;
+        return 10017;
 
       $i = 0;
 
@@ -154,6 +155,8 @@
 
         $games[$i++] = $g;
       }
+
+      $db->close();
 
       if (count($games) < 1) { $this->games == NULL; return 10012; }
 
@@ -165,12 +168,11 @@
     public function hasGame($id) {
       if ($this->games == NULL) {
         $this->games = $this->getGames();
-        if ($this->games instanceof int) {
-          switch ($this->games) {
-            case 10001:
-            case 10011:
-            case 10012: $this->games = NULL; return false;
-          }
+        switch ($this->games) {
+          case 10001:
+          case 10011:
+          case 10012:
+          case 10017: $this->games = NULL; return false;
         }
       }
 

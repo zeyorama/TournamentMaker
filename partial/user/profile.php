@@ -106,9 +106,11 @@
         <li class="nav-header">Games</li>
         <?php
           $games = $user->getGames();
-
-          foreach ($games as $g)
-            echo $g->name."<br>";
+          if ($games == 10017)
+            echo "No games in list<br>";
+          else
+            foreach ($games as $g)
+              echo $g->name."<br>";
           
         ?>
       </div>
