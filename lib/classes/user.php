@@ -28,6 +28,7 @@
       10012 : this user has no games
       10011 : query to delete game of user failed
       10012 : query to insert game of user failed
+      10013 : user already has game
 
       10098 : registration failed, query wrong or wrong values
 
@@ -105,13 +106,13 @@
       return $this->role == ADMIN;
     }
 
-    public function addGame($id) {
+    public function addGame($game_id) {
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
       if ($db->errno)
         return 10001;
 
-      if (!($res = $db->query("INSERT INTO `_user_game`() VALUES('".$this->id."');")))
+      if (!($res = $db->query("INSERT INTO `_user_game`(`user_id`,`game_id`) VALUES('".$this->id."','$game_id');")))
         return 10014;
 
       return 10000;
@@ -130,6 +131,8 @@
     }
 
     public function getGames() {
+      if ($this->games != NULL) return $this->games;
+
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
       if ($db->errno)
@@ -139,28 +142,32 @@
         return 10011;
 
       if ($res->num_rows < 1)
-        return 100012;
+        return 10012;
 
-      $games = array();
       $i = 0;
 
       while ($r = $res->fetch_assoc()) {
-        if (!($g = Game::getGame($r['game_id']))) continue;
+        if (!(($g = Game::getGame($r['game_id'])) instanceof Game)) continue;
 
         $games[$i++] = $g;
       }
 
-      if (count($games) < 1) return 10012;
+      if (count($games) < 1) { $this->games == NULL; return 10012; }
 
-      return $g;
+      $this->games = $games;
+
+      return $this->games;
     }
 
     public function hasGame($id) {
       if ($this->games == NULL) {
-        switch ($this->games = $this->getGames()) {
-          case 10001:
-          case 10011:
-          case 10012: $this->games = NULL; return false;
+        $this->games = $this->getGames();
+        if ($this->games instanceof int) {
+          switch ($this->games) {
+            case 10001:
+            case 10011:
+            case 10012: $this->games = NULL; return false;
+          }
         }
       }
 

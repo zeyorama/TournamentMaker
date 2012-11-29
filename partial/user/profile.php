@@ -20,10 +20,9 @@
       case 10001:
       case 10002:
       case 10004:
-        echo '<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">x</button>An error occured while connecting to database, please retry or wait 10 minutes and retry than.</div>';
+        header("Location: index.php?e=$err");
         exit();
-        break;
-
+      
     }
 
   } else {
@@ -76,7 +75,7 @@
 
     if ($b) {
   ?>
-      <div class="well">
+      <div class="box well">
         <ul class="nav">
           <li class="nav-header">Options</li>
           <li><a href="index.php?f=user&s=addGame">Add a Game</a></li>
@@ -105,6 +104,13 @@
       </div>
       <div class="well">
         <li class="nav-header">Games</li>
+        <?php
+          $games = $user->getGames();
+
+          foreach ($games as $g)
+            echo $g->name."<br>";
+          
+        ?>
       </div>
     </div>
   </div>

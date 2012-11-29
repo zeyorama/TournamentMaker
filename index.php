@@ -67,6 +67,7 @@
               </p>
             </div>
           </div>
+          <hr>
         </div>
       </div>
       <div class="container-fluid">

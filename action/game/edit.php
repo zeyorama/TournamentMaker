@@ -5,13 +5,15 @@
 
   include '../../epic.php';
 
-  if ($u != NULL) {
+  $u = current_user();
+
+  if ($u == NULL) {
     header("Location: ../../index.php");
     exit();
   }
 
   if (!$u->isAdmin()) {
-    header("Location: ../../index.php");
+    header("Location: ../../index.php?");
     exit();
   }
 

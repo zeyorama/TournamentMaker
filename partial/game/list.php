@@ -48,21 +48,21 @@
         <td><?php echo $game->release; ?></td>
         <td>
           <ul class="nav nav-pills">
-<?php if ($u != NULL) { ?>
-            <?php if ($u->hasGame($game->getID())) {?>
+<?php   if ($u != NULL) { ?>
+<?php     if ($u->hasGame($game->getID())) {?>
             <li class="disabled"><a href="action/user/delGame.php?id=<?php echo $game->getID(); ?>">Remove game from my list</a></li>
-            <?php } else {?>
-            <li><a href="action/user/addGame.php?id=<?php echo $game->getID(); ?>">Add game to my list</a></li>
-            <?php } ?>
-<?php   if ($u->isAdmin()) { ?>
+    <?php } else {?>
+            <li><a href="action/user/addGame.php?id=<?php echo $game->getID(); ?>">Add game to my list</a></li>            
+    <?php } ?>
+<?php     if ($u->isAdmin()) { ?>
             <li><a href="action/game/delete.php?id=<?php echo $game->getID(); ?>">Remove game</a></li>
             <li><a href="index.php?f=game&s=edit&id=<?php echo $game->getID(); ?>">Edit game</a></li>
             <!-- Additional actions for admin only -->            
-<?php   } ?>
-<?php   if (!$game->isReviewedByUser($u->getID())) { ?>
+<?php     } ?>
+<?php     if (!$game->isReviewedByUser($u->getID())) { ?>
             <li><a href="index.php?f=game&s=review&id=<?php echo $game->getID(); ?>">Review game</a></li>
+<?php     } ?>
 <?php   } ?>
-<?php } ?>
           </ul>
         </td>
       </tr>

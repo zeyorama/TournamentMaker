@@ -11,6 +11,12 @@
               case 10003:
                 echo 'Username or password wrong, please retry.';
                 break;
+              case 10004:
+                echo 'User not found.';
+                break;
+              case 10014:
+                echo 'Game could not be added to your profile, sorry about that.';
+                break;
               case 10098:
                 echo 'Database error while registration, please retry!';
                 break;
@@ -21,6 +27,8 @@
               case 10101:
               case 10103:
               case 10105:
+              case 10121:
+              case 10122:
                 echo 'Database error, please retry!';
                 break;
               case 10102:
@@ -34,6 +42,9 @@
                 break;
               case 10107:
                 echo 'Update failed, please try again or contact an admin.';
+                break;
+              case 10120:
+                echo 'Game already reviewed.';
                 break;
             }
 ?>                
