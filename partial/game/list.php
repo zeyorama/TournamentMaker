@@ -59,10 +59,12 @@
             <li><a href="index.php?f=game&s=edit&id=<?php echo $game->getID(); ?>">Edit game</a></li>
             <!-- Additional actions for admin only -->            
 <?php     } ?>
-<?php     if (!$game->isReviewedByUser($u->getID())) { ?>
-            <li><a href="index.php?f=game&s=review&id=<?php echo $game->getID(); ?>">Review game</a></li>
-<?php     } ?>
 <?php   } ?>
+<?php     if ($u == NULL || $game->isReviewedByUser($u->getID())) { ?>
+            <li><a href="index.php?f=game&s=review&game=<?php echo $game->getID(); ?>">Review</a></li>
+<?php     } else { ?>
+            <li><a href="index.php?f=game&s=review&game=<?php echo $game->getID(); ?>">Review game</a></li>
+<?php     } ?>
           </ul>
         </td>
       </tr>

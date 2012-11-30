@@ -6,6 +6,8 @@
               # user specific
               case 10001:
               case 10002:
+              case 10015:
+              case 10016:
                 echo 'Database error, please retry.';
                 break;
               case 10003:
@@ -14,8 +16,17 @@
               case 10004:
                 echo 'User not found.';
                 break;
+              case 10012:
+                echo 'No games found.';
+                break;
+              case 10013:
+                echo 'Game already in list.';
+                break;
               case 10014:
                 echo 'Game could not be added to your profile, sorry about that.';
+                break;
+              case 10017:
+                echo 'Empty game list.';
                 break;
               case 10098:
                 echo 'Database error while registration, please retry!';

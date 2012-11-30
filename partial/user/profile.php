@@ -75,7 +75,7 @@
     }
 
     if ($b) {
-  ?>
+?>
       <div class="box well">
         <ul class="nav">
           <li class="nav-header">Options</li>

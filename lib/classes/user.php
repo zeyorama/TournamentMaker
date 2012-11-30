@@ -33,6 +33,7 @@
       10017 : user doesn't have any games
       
       10098 : registration failed, query wrong or wrong values
+      10099 : wrong register values
 
      */
 

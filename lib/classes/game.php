@@ -234,6 +234,10 @@
       return true;
     }
 
+    public function getReviews() {
+
+    }
+
   }
 
 ?>
