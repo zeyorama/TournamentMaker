@@ -22,6 +22,10 @@
         include 'user/addGame.php';
         break;
 
+      case 'delGame':
+        include 'user/delGame.php';
+        break;
+
       default:
         include '_index.php';
         break;

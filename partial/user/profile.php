@@ -26,6 +26,7 @@
     }
 
   } else {
+    if (!isset($u)) { header("Location: index.php"); exit(); }
     $user = $u;
 
   }
@@ -79,7 +80,7 @@
         <ul class="nav">
           <li class="nav-header">Options</li>
           <li><a href="index.php?f=user&s=addGame">Add a Game</a></li>
-          <li><a href="index.php?f=user&s=remGame">Remove a Game</a></li>
+          <li><a href="index.php?f=user&s=delGame">Remove a Game</a></li>
           <li><a href="index.php?f=user&s=rP">Reset Password</a></li>
         </ul>
       </div>

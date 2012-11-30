@@ -8,6 +8,7 @@
       <hr>
       <?php if ($u != NULL) { ?>
       <!-- Looged in -->
+      <li><a href="index.php?f=user&s=profile">My Profile</a></li>
       <li><a href="">My Tournaments</a></li>
       <hr>
         <?php if ($u->isAdmin()) { ?>
