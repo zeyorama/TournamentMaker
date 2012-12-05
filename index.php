@@ -21,7 +21,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title><?php SYSNAME(); ?></title>
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/formate.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen">
@@ -36,12 +36,12 @@
         <!-- HEADER -->
         <div class="span12" style="letter-spacing: 2px;">
           <center>
-            <h1>TournamentMaker</h1>
+            <h1><?php SYSNAME(); ?></h1>
           </center>
           <div class="row">
             <div class="span3 offset3">
               <font style="font-family: monospace; border-bottom: 1px dotted black;">
-                We establish your events
+                <?php printMotto(); ?>
               </font>
             </div>
           </div>
@@ -126,6 +126,6 @@
         </div>
       </div>
     </div>
-    <footer><center>TournamentMaker<br>&copy; by Frank Kevin Zey 2012</center></footer>
+    <footer><center><?php printName();?> <?php printVersion(); ?><br>&copy; by Frank Kevin Zey <?php echo date("Y"); ?></center></footer>
   </body>
 </html>

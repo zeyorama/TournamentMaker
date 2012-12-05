@@ -4,6 +4,7 @@
    */
 
   # include 'core/'
+  include 'core/sysconst.php';
   include 'core/constants.php';
   
   #include 'classes/'
@@ -25,5 +26,29 @@
 
   function setValue($v) {
     echo "value='$v'";
+  }
+
+  function SYSNAME() {
+    echo SYS_NAME;
+  }
+
+  function SYSVERSION() {
+    echo SYS_VERSION;
+  }
+
+  function SYSBUILD() {
+    echo SYS_BUILD;
+  }
+
+  function printName() {
+    echo SYSNAME();
+  }
+
+  function printVersion() {
+    echo "v.".SYS_VERSION." build ".SYS_BUILD;
+  }
+
+  function printMotto() {
+    echo SYS_MOTTO;
   }
 ?>
