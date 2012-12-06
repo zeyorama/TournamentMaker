@@ -56,14 +56,8 @@
             <td><?php echo date("M.Y", strtotime($user->created_at)); ?></td>
           </tr>
           <tr>
-            <th>Number of played tournaments</th>
+            <th>Tournaments played</th>
             <td>XXX</td>
-          </tr>
-          <tr>
-            <th>Ingame Names</th>
-            <td>
-              XXX
-            </td>
           </tr>
         </table>
       </div>
@@ -110,8 +104,15 @@
           if ($games == 10017)
             echo "No games in list<br>";
           else
-            foreach ($games as $g)
-              echo $g->name."<br>";
+            foreach ($games as $g) {
+              $nn = '';
+              if (($nick = $user->game_nick[$g->getID()]) != NULL)
+                $nn = ' - '.$nick;
+              else 
+                $nn = " - <a href='index.php?f=user&s=ingame&GID={$g->getID()}'>Set ingame nickname</a>";
+
+              echo $g->name."".$nn."<br>";
+            }
           
         ?>
       </div>

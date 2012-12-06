@@ -8,6 +8,7 @@
               case 10002:
               case 10015:
               case 10016:
+              case 10018:
                 echo 'Database error, please retry.';
                 break;
               case 10003:
@@ -89,6 +90,10 @@
 
               case 'user_game_add':
                 echo 'Game successfully added to my list.';
+                break;
+
+              case 'ingame_add':
+                echo 'Ingame nickname added to game.';
                 break;
 
               case 'user_game_del':

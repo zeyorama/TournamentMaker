@@ -17,7 +17,7 @@
   final class Game {
 
     /*
-      errcodes: 100xx
+      errcodes: 101xx
       10100 : no error
       10101 : no db connection
       10102 : wrong/missing datas for new game

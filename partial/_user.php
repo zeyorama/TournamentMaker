@@ -26,6 +26,10 @@
         include 'user/delGame.php';
         break;
 
+      case 'ingame':
+        include 'user/setInGameNick.php';
+        break;
+
       default:
         include '_index.php';
         break;

@@ -31,6 +31,7 @@
       10015 : query to delete game of user failed
       10016 : query to insert game of user failed
       10017 : user doesn't have any games
+      10018 : ingame nick name update failed
       
       10098 : registration failed, query wrong or wrong values
       10099 : wrong register values
@@ -48,6 +49,7 @@
     public $created_at;
     public $updated_at;
     public $last_signin;
+    public $game_nick;
 
     private $games = NULL;
 
@@ -105,6 +107,18 @@
       
     }
 
+    public function setInGameNick($gameId, $nick) {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("UPDATE `_user_game` SET `ingame_nick`='$nick' WHERE `game_id`='$gameId' AND `user_id`='{$this->id}';")))
+        return 10018;
+
+      return 10000;
+    }
+
     public function isAdmin() {
       return $this->role == ADMIN;
     }
@@ -155,6 +169,7 @@
         if (!(($g = Game::getGame($r['game_id'])) instanceof Game)) continue;
 
         $games[$i++] = $g;
+        $this->game_nick[$g->getID()] = $r['ingame_nick'];
       }
 
       $db->close();
