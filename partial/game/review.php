@@ -4,7 +4,7 @@
    */
   
   $game = Game::getGame($_GET['game']);
-  $gr = $game->getReviews();
+  $gr = $game->getReviews(10);
 
   if ($u == NULL || $game->isReviewedByUser($u->getID())) {
 ?>
@@ -22,15 +22,31 @@
     <div class="pull-left span7">  
       <div class="box well">
         <li class="nav-header">reviews</li>
-        <label>Average Rating: xxx<label>
-        <label>Last 10 comments:</label>
+        <label>Average Rating:
+<?php
+  $rate = 0;
+  $i = 0;
+  foreach ($gr as $value) {
+    $rate += $value['_rate'];
+    $i++;
+  }
+  $rate /= $i;
+  echo $rate;
+?>
+        <label>
+        <label>Last 10 reviews:</label>
         <ul>
 <?php
-  
+  foreach ($gr as $review) {
+    $user = User::getUser($review['user_id']);
 ?>
-          <li class="nav-header"><?php  ?></li>
+          <div class="well">  
+            <li class="nav-header"><strong><?php echo $user->username; ?></strong></li>
+            <li class="nav-header">Rate: <?php echo $review['_rate']; ?></li>
+            <li class="nav-header"><?php echo $review['_comment']; ?></li>
+          </div>
 <?php
-  
+  }
 ?>
         </ul>
       </div>
@@ -53,7 +69,8 @@
     </div>
     <div class="pull-left span7">
       <div class="box well">
-        <form class="form-vertical" action="" method="POST">
+        <form class="form-vertical" action="action/game/review.php" method="POST">
+          <input type="hidden" name="GID" value="<?php echo $_GET['game']; ?>">
           <div class="control-group">
             <label class="control-label" for="selectGameRate">Rating</label>
             <div class="controls">

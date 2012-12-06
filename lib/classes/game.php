@@ -30,6 +30,8 @@
       10120 : user already reviewed
       10121 : insert review for game query failed
       10122 : isreviewed query failed
+      10123 : select review query failed
+      10124 : no reviews found
 
       10131 : delete query failed
       
@@ -198,7 +200,7 @@
      * @return Returns true if successfully reviewed, otherwise errorcode
      */
     public function setReview($uid, $rate, $comment) {
-      if ($this->isReviewdByUser($uid)) return 10120;
+      if ($this->isReviewedByUser($uid)) return 10120;
 
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
@@ -234,8 +236,28 @@
       return true;
     }
 
-    public function getReviews() {
+    public function getReviews($num = -1) {
+      $limit = "";
+      if ($num != -1)
+        $limit = "LIMIT 0,$num";
+      
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
+      if ($db->errno) return 10101;
+
+      $query = "SELECT * FROM `_game_review` WHERE `game_id`='{$this->id}' ORDER BY `_id` DESC $limit;";
+
+      if (!($res = $db->query($query))) return 10123;
+
+      if ($res->num_rows < 1) return 10124;
+
+      $i = 0;
+      $reviews = array();
+      while (($review = $res->fetch_assoc()) != NULL) {
+        $reviews[$i++] = $review;
+      }
+
+      return $reviews;
     }
 
   }

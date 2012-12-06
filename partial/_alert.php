@@ -59,6 +59,9 @@
               case 10120:
                 echo 'Game already reviewed.';
                 break;
+              case 10121:
+                echo 'Review failed.';
+                break;
             }
 ?>                
               </div>
@@ -110,6 +113,10 @@
 
               case 'game_edit':
                 echo 'Game successfully edited.';
+                break;
+
+              case 'add_review':
+                echo 'Review successful.';
                 break;
             }
 ?>

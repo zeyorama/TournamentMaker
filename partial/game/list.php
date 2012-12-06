@@ -60,7 +60,8 @@
             <!-- Additional actions for admin only -->            
 <?php     } ?>
 <?php   } ?>
-<?php     if ($u == NULL || $game->isReviewedByUser($u->getID())) { ?>
+
+<?php     if ($u == NULL || $game->isReviewedByUser($u->getID()) || !$u->hasGame($game->getID())) { ?>
             <li><a href="index.php?f=game&s=review&game=<?php echo $game->getID(); ?>">Review</a></li>
 <?php     } else { ?>
             <li><a href="index.php?f=game&s=review&game=<?php echo $game->getID(); ?>">Review game</a></li>
