@@ -51,4 +51,8 @@
   function printMotto() {
     echo SYS_MOTTO;
   }
+
+  function printOption($value, $title) {
+    return "<option value='$value'>$title</option>";
+  }
 ?>

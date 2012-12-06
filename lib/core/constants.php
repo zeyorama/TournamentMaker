@@ -20,5 +20,7 @@
 
   # tournament specific constants
   define("TOUR_TABLE_NAME", "_tour");
+  define("TOUR_TYPE_SINGLE_ELIMINATION", "0");
+  define("TOUR_TYPE_DOUBLE_ELIMINATION", "1");
 
 ?>
