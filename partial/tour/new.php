@@ -51,9 +51,9 @@
             <span class="add-on"><i class="icon-th"></i></span>
             <select class="control-select" id="selectTourMaxPlayer" name="tourMaxPlayer">
             <?php
-              echo printOption(16, "16 Players");
-              echo printOption(32, "32 Players");
-              echo printOption(64, "64 Players");
+              echo printOption(16, "16 Players/Teams");
+              echo printOption(32, "32 Players/Teams");
+              echo printOption(64, "64 Players/Teams");
             ?>
             </select>
           </div>
