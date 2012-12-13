@@ -1,0 +1,1 @@
+<a href="index.php?f=tour&s=new">New tournament</a>

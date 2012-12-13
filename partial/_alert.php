@@ -83,7 +83,7 @@
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
 <?php
             switch ($_GET['confirm']) {
-              case 'user_registration':
+              case 'user_register':
                 echo 'Registered successfully, please log in.';
                 break;
 

@@ -4,7 +4,7 @@
       <!-- Not logged in -->
       <li><a href="index.php">Home</a></li>
       <li><a href="index.php?f=game&s=list">Games</a></li>
-      <li><a href="">Tournaments</a></li>
+      <li><a href="index.php?f=tour&s=list">Tournaments</a></li>
       <hr>
       <?php if ($u != NULL) { ?>
       <!-- Looged in -->

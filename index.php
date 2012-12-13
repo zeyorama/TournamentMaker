@@ -26,9 +26,12 @@
     <link rel="stylesheet" type="text/css" href="css/formate.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/datepicker.css" media="screen">
+    <link href="less/datepicker.less" rel="stylesheet" type="text/css" />
     <!-- JavaScripts -->
     <script type="text/javascript" src="js/jquery.183.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/datepicker.js"></script>
   </head>
   <body class="tmwb_main">
     <div class="container">
@@ -95,7 +98,7 @@
                     include 'partial/_user.php';
                     break;
 
-                  case 'tournament':
+                  case 'tour':
                     include 'partial/_tour.php';
                     break;
 
