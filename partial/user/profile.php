@@ -84,18 +84,86 @@
 ?>
     </div>
     <div class="box pull-right span6">
+      <?php
+        $tours = $user->getTournaments();
+        $b = false;
+        switch ($tours) {
+          case 10021:
+          case 10022:
+            $num_tours = 0;
+            break;
+          
+          default:
+            $num_tours = count($tours);
+            $b = true;
+            break;
+        }
+      ?>
       <div class="well">
-        <li class="nav-header">Tournaments</li>
+        <li class="nav-header">Tournaments - <?php echo $num_tours; ?> found</li>
+<?php if ($b) { ?>
         <h6>Upcoming Tournaments</h6>
+        <table class="table table-hover table-condensed">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Game</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
 <?php
-# Lists of Tournaments
+        foreach ($tours as $tour) {
+          if ($tour->status >= 2) continue;
 ?>
-        ...
+            <tr>
+              <td><?php echo $tour->name; ?></td>
+              <td><?php echo $tour->getGame()->name; ?></td>
+              <td><?php echo $tour->start; ?></td>
+              <td><?php
+                switch ($tour->status) {
+                  case 0 :
+                    echo "<font class=''>Not running</font>";
+                    break;
+                  
+                  case 1 :
+                    echo "<font class=''>Not running</font>";
+                    break;
+                }
+              ?></td>
+            </tr>
+<?php
+        }
+?>
+          </tbody>
+        </table>
+        <hr>
         <h6>Finished Tournaments</h6>
+        <table class="table table-hover table-condensed">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Game</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
 <?php
-# List of finished Tournaments
+        foreach ($tours as $tour) {
+          if ($tour->status < 2) continue;
 ?>
-        ...
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+<?php
+        }
+?>    
+          </tbody>
+        </table>
+<?php } ?>
       </div>
       <div class="well">
         <li class="nav-header">Games</li>

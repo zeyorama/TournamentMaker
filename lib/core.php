@@ -10,6 +10,7 @@
   #include 'classes/'
   include 'classes/game.php';
   include 'classes/user.php';
+  include 'classes/tournament.php';
 
   /**
    * Returns the user object of the current logged in user.

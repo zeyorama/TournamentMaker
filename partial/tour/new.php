@@ -1,21 +1,3 @@
-<script>
-  $(function(){
-    window.prettyPrint && prettyPrint();
-    var startDate = new Date(<?php echo date('Y'); ?>,1,1);
-    var endDate = new Date(<?php echo ((int)date('Y') + 1); ?>,12,31);
-    $( '#dp3' ).datepicker()
-      .on('changeDate', function(ev){
-        if (ev.date.valueOf() > endDate.valueOf()){
-          $('#alert').show().find('strong').text('The start date can not be greater then the end date');
-        } else {
-          $('#alert').hide();
-          startDate = new Date(ev.date);
-          $('#startDate').text($('#dp3').data('date'));
-        }
-        $('#dp3').datepicker('hide');
-      });
-  });
-</script>
 <div class="box well">
   <li class="nav-header"><strong>Create a new tournament</strong></li>
   <div class="box">
@@ -25,7 +7,7 @@
         <div class="controls">
           <div class="input-prepend">
             <span class="add-on"><i class="icon-flag"></i></span>
-            <input id="inputTourName" class="control-input" type="text" maxlength="255" name="tourName">
+            <input id="inputTourName" class="control-input" type="text" maxlength="255" name="tourName" required>
           </div>
         </div>
       </div>
@@ -34,7 +16,7 @@
         <div class="controls">
           <div class="input-prepend">
             <span class="add-on"><i class="icon-chevron-up"></i></span>
-            <select class="control-select" id="selectTourGame" name="tourGame">
+            <select class="control-select" id="selectTourGame" name="tourGame" required>
 <?php
             foreach (Game::getAllGamesArray() as $game) {
               echo printOption($game->getID(), $game->name);
@@ -49,11 +31,11 @@
         <div class="controls">
           <div class="input-prepend">
             <span class="add-on"><i class="icon-th"></i></span>
-            <select class="control-select" id="selectTourMaxPlayer" name="tourMaxPlayer">
+            <select class="control-select" id="selectTourMaxPlayer" name="tourMaxPlayer" required>
             <?php
-              echo printOption(16, "16 Players/Teams");
-              echo printOption(32, "32 Players/Teams");
-              echo printOption(64, "64 Players/Teams");
+              echo printOption(16, "16 Players or Teams");
+              echo printOption(32, "32 Players or Teams");
+              echo printOption(64, "64 Players or Teams");
             ?>
             </select>
           </div>
@@ -64,7 +46,7 @@
         <div class="controls">
           <div class="input-prepend">
             <span class="add-on"><i class="icon-tasks"></i></span>
-            <select class="control-select" id="selectTourGrid" name="tourGrid">
+            <select class="control-select" id="selectTourGrid" name="tourGrid" required>
             <?php
               echo printOption(TOUR_TYPE_SINGLE_ELIMINATION, "Single Elimination");
               echo printOption(TOUR_TYPE_DOUBLE_ELIMINATION, "Double Elimination");
@@ -76,9 +58,13 @@
       <div class="control-group">
         <label for="dateSelect" class="control-label">When will the tournament begins</label>
         <div class="controls">
-          <div class="input-prepend date datepicker" id="dp3" data-date="<?php echo date('d-m-Y'); ?>" data-date-format="dd-mm-yyyy">
+          <div class="input-prepend date datepicker" id="datepicker" data-behaviour="datepicker"  data-date="<?php echo date('d-m-Y'); ?>" data-date-format="dd-mm-yyyy">
             <span class="add-on"><i class="icon-calendar"></i></span>
-            <input class="span6" size="16" type="datetime" value="<?php echo date('d-m-Y'); ?>" name="tourStart" readonly>
+            <input class="span6" size="16" type="text" value="<?php echo date('d-m-Y'); ?>" name="tourStart" required readonly>
+          </div>
+          <div class="input-prepend time timepicker">
+            <span class="add-on"><i class="icon-play"></i></span>
+            <input class="span6" size="16" type="text" name="tourTime" data-behaviour="timepicker" id="timepicker" value="<?php echo date("H:i"); ?>" required>
           </div>
         </div>
       </div>
@@ -93,3 +79,6 @@
     </form>
   </div>
 </div>
+<script type="text/javascript">
+  $('#datepicker').datepicker();
+</script>

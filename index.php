@@ -24,14 +24,14 @@
     <title><?php SYSNAME(); ?></title>
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/formate.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="css/datepicker.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+    <link rel="stylesheet" type="text/css" href="css/datepicker.css">
     <link href="less/datepicker.less" rel="stylesheet" type="text/css" />
     <!-- JavaScripts -->
     <script type="text/javascript" src="js/jquery.183.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/datepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
   </head>
   <body class="tmwb_main">
     <div class="container">

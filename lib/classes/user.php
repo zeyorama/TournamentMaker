@@ -32,6 +32,9 @@
       10016 : query to insert game of user failed
       10017 : user doesn't have any games
       10018 : ingame nick name update failed
+
+      10021 : get all tournaments query failed
+      10022 : no tournaments found
       
       10098 : registration failed, query wrong or wrong values
       10099 : wrong register values
@@ -247,6 +250,160 @@
         return 10000;
 
       return 10098;
+    }
+
+    public function getTournaments() {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("SELECT * FROM `_tour_user` WHERE `user_id` = '".$this->id."' ORDER BY `_id` DESC;")))
+        return 10021;
+
+      if (!($res2 = $db->query("SELECT * FROM `_tour` WHERE `owner`='{$this->id}' ORDER BY `_id` DESC;")))
+        return 10021;
+      
+      $t = array();
+      $i = 0;
+      while ($tz = $res2->fetch_assoc()) {
+        $t[$i++] = Tournament::getTournament($tz['_id']);
+      }
+
+      while ($zt = $res->fetch_assoc()) {
+        $thisTour = Tournament::getTournament($zt['tour_id']);
+        $b = false;
+        foreach ($t as $tournament) {
+          if ($tournament->equals($thisTour)) {
+            $b = true;
+            break;
+          }
+        }
+        $t[$i++] = $thisTour;
+      }
+
+      if ($i < 1) return 10022;
+
+      return $t;
+    }
+
+    public function getTournamentsFinished() {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("SELECT * FROM `_tour_user` WHERE `user_id` = '".$this->id."' ORDER BY `_id` DESC;")))
+        return 10021;
+
+      if (!($res2 = $db->query("SELECT * FROM `_tour` WHERE `owner`='{$this->id}' ORDER BY `_id` DESC;")))
+        return 10021;
+      
+      $t = array();
+      $i = 0;
+      while ($tz = $res2->fetch_assoc()) {
+        $t[$i++] = Tournament::getTournament($tz['_id']);
+      }
+
+      while ($zt = $res->fetch_assoc()) {
+        $thisTour = Tournament::getTournament($zt['tour_id']);
+        $b = false;
+        foreach ($t as $tournament) {
+          if ($tournament->equals($thisTour)) {
+            $b = true;
+            break;
+          }
+        }
+        $t[$i++] = $thisTour;
+      }
+
+      if ($i < 1) return 10022;
+
+      $j = 0;
+      $tt = array();
+      foreach ($t as $tournaments) {
+        if ($tournaments->status != 2) continue;
+
+        $tt[$j++] = $tournaments;
+      }
+
+      if ($j < 1) return 10022;
+
+      return $tt;
+    }
+
+    public function getTournamentsUpcoming() {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      if (!($res = $db->query("SELECT * FROM `_tour_user` WHERE `user_id` = '".$this->id."' ORDER BY `_id` DESC;")))
+        return 10021;
+
+      if (!($res2 = $db->query("SELECT * FROM `_tour` WHERE `owner`='{$this->id}' ORDER BY `_id` DESC;")))
+        return 10021;
+      
+      $t = array();
+      $i = 0;
+      while ($tz = $res2->fetch_assoc()) {
+        $t[$i++] = Tournament::getTournament($tz['_id']);
+      }
+
+      while ($zt = $res->fetch_assoc()) {
+        $thisTour = Tournament::getTournament($zt['tour_id']);
+        $b = false;
+        foreach ($t as $tournament) {
+          if ($tournament->equals($thisTour)) {
+            $b = true;
+            break;
+          }
+        }
+        $t[$i++] = $thisTour;
+      }
+
+      if ($i < 1) return 10022;
+
+      $j = 0;
+      $tt = array();
+      foreach ($t as $tournaments) {
+        if ($tournaments->status == 2) continue;
+
+        $tt[$j++] = $tournaments;
+      }
+
+      if ($j < 1) return 10022;
+
+      return $tt;
+    }
+
+    public function getMyTournaments() {
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      if (!($res2 = $db->query("SELECT * FROM `_tour` WHERE `owner`='{$this->id}' ORDER BY `_id` DESC;"))) return 10221;
+      
+      $t = array();
+      $i = 0;
+      while ($tz = $res2->fetch_assoc()) {
+        $t[$i++] = Tournament::getTournament($tz['_id']);
+      }
+
+      if ($i < 1) return 10022;
+
+      $j = 0;
+      $tt = array();
+      foreach ($t as $tournaments) {
+        if ($tournaments->status == 2) continue;
+
+        $tt[$j++] = $tournaments;
+      }
+
+      if ($j < 1) return 10022;
+
+      return $tt;
     }
 
   }
