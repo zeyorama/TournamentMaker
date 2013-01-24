@@ -210,7 +210,7 @@
 
       if (!$db->query($query)) return 10121;
 
-      return true;
+      return 10100;
     }
 
     /**
@@ -239,7 +239,7 @@
     public function getReviews($num = -1) {
       $limit = "";
       if ($num != -1)
-        $limit = "LIMIT 0,$num";
+        $limit = "LIMIT 0, $num";
       
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
@@ -253,9 +253,8 @@
 
       $i = 0;
       $reviews = array();
-      while (($review = $res->fetch_assoc()) != NULL) {
+      while (($review = $res->fetch_assoc()) != NULL)
         $reviews[$i++] = $review;
-      }
 
       return $reviews;
     }

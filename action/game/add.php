@@ -5,7 +5,7 @@
 
   include '../../epic.php';
 
-  if ($u != NULL) {
+  if ($u == NULL) {
     header("Location: ../../index.php");
     exit();
   }

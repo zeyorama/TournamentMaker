@@ -169,7 +169,7 @@
       $i = 0;
 
       while ($r = $res->fetch_assoc()) {
-        if (!(($g = Game::getGame($r['game_id'])) instanceof Game)) continue;
+        if (is_int(($g = Game::getGame($r['game_id'])))) continue;
 
         $games[$i++] = $g;
         $this->game_nick[$g->getID()] = $r['ingame_nick'];
@@ -181,17 +181,23 @@
 
       $this->games = $games;
 
+      unset($_SESSION['user']);
+      $_SESSION['user'] = serialize($this);
+
       return $this->games;
     }
 
     public function hasGame($id) {
       if ($this->games == NULL) {
         $this->games = $this->getGames();
+
         switch ($this->games) {
           case 10001:
           case 10011:
           case 10012:
-          case 10017: $this->games = NULL; return false;
+          case 10017:
+            $this->games = NULL;
+            return false;
         }
       }
 
@@ -266,19 +272,15 @@
       
       $t = array();
       $i = 0;
-      while ($tz = $res2->fetch_assoc()) {
+      while ($tz = $res2->fetch_assoc())
         $t[$i++] = Tournament::getTournament($tz['_id']);
-      }
 
       while ($zt = $res->fetch_assoc()) {
         $thisTour = Tournament::getTournament($zt['tour_id']);
-        $b = false;
-        foreach ($t as $tournament) {
-          if ($tournament->equals($thisTour)) {
-            $b = true;
-            break;
-          }
-        }
+        
+        foreach ($t as $tournament)
+          if ($tournament->equals($thisTour)) break;
+
         $t[$i++] = $thisTour;
       }
 
@@ -404,6 +406,23 @@
       if ($j < 1) return 10022;
 
       return $tt;
+    }
+
+    /**
+     * Compares two user objects, if they are equal by ID
+     *
+     * @param Object to be compared
+     *
+     * @return true, if equal, otherwise false
+     */
+    public function equals($object) {
+      if (!($object instanceof User))
+        return false;
+
+      if ($this->id == $object->getID())
+        return true;
+
+      return false;
     }
 
   }

@@ -6,3 +6,11 @@ table tr th {
   text-align: left;
   vertical-align: top;
 }
+
+input#datepicker {
+	cursor: pointer;
+}
+
+input#timepicker {
+	cursor: pointer;
+}

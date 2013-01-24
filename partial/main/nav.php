@@ -9,6 +9,7 @@
       <?php if ($u != NULL) { ?>
       <!-- Looged in -->
       <li><a href="index.php?f=user&s=profile">My Profile</a></li>
+      <li><a href="index.php?f=game&s=my">My Games</a></li>
       <li><a href="index.php?f=tour&s=list&fract=my">My Tournaments</a></li>
       <hr>
         <?php if ($u->isAdmin()) { ?>

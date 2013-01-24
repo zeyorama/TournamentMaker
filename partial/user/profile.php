@@ -118,17 +118,25 @@
           if ($tour->status >= 2) continue;
 ?>
             <tr>
-              <td><?php echo $tour->name; ?></td>
+              <td><a href="index.php?f=tour&s=tournament&id=<?php echo $tour->getID(); ?>"><?php echo $tour->name; ?></a></td>
               <td><?php echo $tour->getGame()->name; ?></td>
-              <td><?php echo $tour->start; ?></td>
+              <td><?php echo date("d.m.y", strtotime($tour->start)); ?></td>
               <td><?php
                 switch ($tour->status) {
-                  case 0 :
-                    echo "<font class=''>Not running</font>";
+                  case TOUR_STATUS_NOT_STARTED :
+                    echo "<font>Upcoming</font>";
                     break;
                   
-                  case 1 :
-                    echo "<font class=''>Not running</font>";
+                  case TOUR_STATUS_PREPARED :
+                    echo "<font>Preparing</font>";
+                    break;
+                  
+                  case TOUR_STATUS_RUNNING :
+                    echo "<font>Running</font>";
+                    break;
+                  
+                  case TOUR_STATUS_CLOSED :
+                    echo "<font>Closed</font>";
                     break;
                 }
               ?></td>
@@ -169,13 +177,13 @@
         <li class="nav-header">Games</li>
         <?php
           $games = $user->getGames();
-          if ($games == 10017)
+          if (is_int($games))
             echo "No games in list<br>";
           else
             foreach ($games as $g) {
               $nn = '';
               if (($nick = $user->game_nick[$g->getID()]) != NULL)
-                $nn = ' - '.$nick;
+                $nn = " - $nick";
               else 
                 $nn = " - <a href='index.php?f=user&s=ingame&GID={$g->getID()}'>Set ingame nickname</a>";
 

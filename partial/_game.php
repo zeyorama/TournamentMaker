@@ -30,6 +30,10 @@
       include 'partial/game/review.php';
       break;
 
+    case 'my':
+      include 'partial/game/my.php';
+      break;
+
     default:
       include 'partial/game/list.php';
       break;

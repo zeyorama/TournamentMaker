@@ -1,12 +1,15 @@
 <?php
   $allTours = $u->getTournamentsFinished();
   switch ($allTours) {
+    case 10204:
     case 10022:
       echo '<li class="nav-header">No tournaments found.</li>';
       break;
 
     case 10001:
     case 10021:
+    case 10201:
+    case 10206:
       echo '<li class="nav-header">Error occured, please retry.</li>';
       break;
 
@@ -15,7 +18,7 @@
   <table class="table table-hover table-condensed">
     <thead>
       <tr>
-        <th>TournamentID</th>
+        <th>ID</th>
         <th>Name</th>
         <th>Game</th>
         <th>Publisher</th>

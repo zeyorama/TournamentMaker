@@ -4,9 +4,10 @@
    */
   
   $game = Game::getGame($_GET['game']);
-  $gr = $game->getReviews(10);
+  $gr = $game->getReviews();
+  $rc = 0;
 
-  if ($u == NULL || $game->isReviewedByUser($u->getID())) {
+  if ( $u == NULL || $game->isReviewedByUser($u->getID()) || !$u->hasGame($game->getID()) ) {
 ?>
 <div class="container-fluid">
   <li class="nav-header">game review</li>
@@ -30,25 +31,61 @@
     $rate += $value['_rate'];
     $i++;
   }
+
   $rate /= $i;
-  echo $rate;
+  $rs = "$rate";
+
+  if (strlen($rs) > GAME_RATE_STRING_LENGTH)
+    $rs = substr($rs, 0, GAME_RATE_STRING_LENGTH);
+
+  echo $rs;
 ?>
-        <label>
+&nbsp;
+<?php
+  for ($j=1; $j <= 8; $j++) { 
+    if ($j <= (int)($rate + 0.5)) {
+?>
+  <i class="icon-star"></i>
+<?php
+    } else {
+?>
+  <i class="icon-star-empty"></i>
+<?php
+    }
+  }
+?>
         <label>Last 10 reviews:</label>
-        <ul>
 <?php
   foreach ($gr as $review) {
+    if (++$rc > 10) break;
     $user = User::getUser($review['user_id']);
 ?>
-          <div class="well">  
-            <li class="nav-header"><strong><?php echo $user->username; ?></strong></li>
-            <li class="nav-header">Rate: <?php echo $review['_rate']; ?></li>
-            <li class="nav-header"><?php echo $review['_comment']; ?></li>
+          <div class="box well">
+            <div class="box-header">  
+              <li class="nav-header"><strong><?php echo $user->username; ?></strong></li>
+            </div>
+            <div class="box-content">
+              <li class="nav-header">Rate:&nbsp;
+<?php
+for ($j=1; $j <= 8; $j++) { 
+  if ($j <= $review['_rate']) {
+?>
+  <i class="icon-star"></i>
+<?php
+  } else {
+?>
+  <i class="icon-star-empty"></i>
+<?php
+  }
+}
+?>
+              </li>
+              <p class="box well"><?php echo str_replace("\n", '<br>', $review['_comment']); ?></p>
+            </div>
           </div>
 <?php
   }
 ?>
-        </ul>
       </div>
     </div>
   </div>
@@ -72,7 +109,7 @@
         <form class="form-vertical" action="action/game/review.php" method="POST">
           <input type="hidden" name="GID" value="<?php echo $_GET['game']; ?>">
           <div class="control-group">
-            <label class="control-label" for="selectGameRate">Rating</label>
+            <label class="control-label" for="selectGameRate">Rating <i class="icon-star"></i></label>
             <div class="controls">
               <select id="selectGameRate" class="control-select" name="rate">
                 <option value="1">1</option>

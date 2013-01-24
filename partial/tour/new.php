@@ -58,13 +58,13 @@
       <div class="control-group">
         <label for="dateSelect" class="control-label">When will the tournament begins</label>
         <div class="controls">
-          <div class="input-prepend date datepicker" id="datepicker" data-behaviour="datepicker"  data-date="<?php echo date('d-m-Y'); ?>" data-date-format="dd-mm-yyyy">
+          <div class="input-prepend date datepicker" data-behaviour="datepicker"  data-date="<?php echo date('d-m-Y'); ?>" data-date-format="dd-mm-yyyy">
             <span class="add-on"><i class="icon-calendar"></i></span>
-            <input class="span6" size="16" type="text" value="<?php echo date('d-m-Y'); ?>" name="tourStart" required readonly>
+            <input class="span6" size="16" type="text" id="datepicker" value="<?php echo date('d-m-Y'); ?>" name="tourStart" required readonly>
           </div>
-          <div class="input-prepend time timepicker">
+          <div class="input-prepend bootstrap-timepicker-component">
             <span class="add-on"><i class="icon-play"></i></span>
-            <input class="span6" size="16" type="text" name="tourTime" data-behaviour="timepicker" id="timepicker" value="<?php echo date("H:i"); ?>" required>
+            <input class="span6 timepicker" size="16" type="text" id="timepicker" name="tourTime" value="<?php echo date("H:i"); ?>" required readonly>
           </div>
         </div>
       </div>
@@ -80,5 +80,13 @@
   </div>
 </div>
 <script type="text/javascript">
-  $('#datepicker').datepicker();
+  $(document).ready(function () { 
+    $('#datepicker').datepicker();
+  
+    $('#timepicker').timepicker({
+        minuteStep: 5,
+        defaultTime: 'value',
+        showMeridian: false
+    });
+  });
 </script>

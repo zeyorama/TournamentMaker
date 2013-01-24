@@ -13,8 +13,6 @@
 
     s is the site, for example f=user&s=login for loginscreen
   */
-
-  $u = current_user();
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -22,16 +20,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php SYSNAME(); ?></title>
+    
     <!-- Stylesheets -->
     <link rel="stylesheet" type="text/css" href="css/formate.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
     <link rel="stylesheet" type="text/css" href="css/datepicker.css">
-    <link href="less/datepicker.less" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-timepicker.css">
+    
     <!-- JavaScripts -->
     <script type="text/javascript" src="js/jquery.183.js"></script>
     <script type="text/javascript" src="js/bootstrap.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="js/bootstrap-timepicker.js"></script>
   </head>
   <body class="tmwb_main">
     <div class="container">
@@ -52,7 +53,7 @@
           <div class="row-fluid">
             <!-- Login/Logout/Register -->
             <div class="span3">
-              Logged in as: <?php echo $u==NULL ? "Guest" : "<a href='index.php?f=user&s=profile'>".$u->username."</a>"; ?>
+              Logged in as: <?php echo $u == NULL ? "Guest" : "<a href='index.php?f=user&s=profile'>".$u->username."</a>"; ?>
             </div>
             <div class="span3 pull-right">
               <p class="pull-right">

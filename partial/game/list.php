@@ -33,10 +33,8 @@
     case 10101:
     case 10105:
     case 10106:
-      if (!isset($_GET['e'])) {
+      if (!isset($_GET['e']))
         header("Location: index.php?f=game&s=list&e=$gameList");
-        break;
-      }
       break;
 
     default: 
@@ -50,7 +48,7 @@
           <ul class="nav nav-pills">
 <?php   if ($u != NULL) { ?>
 <?php     if ($u->hasGame($game->getID())) {?>
-            <li class="disabled"><a href="action/user/delGame.php?id=<?php echo $game->getID(); ?>">Remove game from my list</a></li>
+            <li class="disabled"><a href="action/user/delGame.php?id=<?php echo $game->getID(); ?>">Remove from list</a></li>
     <?php } else {?>
             <li><a href="action/user/addGame.php?id=<?php echo $game->getID(); ?>">Add game to my list</a></li>            
     <?php } ?>

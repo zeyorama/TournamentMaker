@@ -25,4 +25,6 @@
   }
 
   include 'lib/core.php';
+
+  $u = current_user();
 ?>

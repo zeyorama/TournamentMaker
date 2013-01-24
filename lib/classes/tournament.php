@@ -34,6 +34,8 @@
       10214 : tournament full
       10215 : player could not be removed out of this tournament
 
+      10221 : select my tournaments failed
+
     */
 
     /************************* constants *************************/
@@ -91,7 +93,7 @@
       $this->maxPlayers = $SQLResultHash['maxPlayers'];
       $this->playerList = $this->getPlayers();
       $this->playerCount = count($this->playerList);
-      $this->owner = $SQLResultHash['owner'];
+      $this->owner = User::getUser($SQLResultHash['owner']);
       $this->status = $SQLResultHash['status'];
     }
 
@@ -142,21 +144,20 @@
     public function getPlayers() {
       $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
 
-      if ($db->errno) return 10201;
+      if ($db->errno) return NULL;
 
       $query = "SELECT * FROM `_tour_user` WHERE `tour_id`='{$this->id}';";
 
-      if (!($res = $db->query($query))) return 10211;
+      if (!($res = $db->query($query))) return NULL;
 
-      if ($res->num_rows < 1) return 10212;
+      if ($res->num_rows < 1) return NULL;
 
       $players = array();
       $i = 0;
-      while ($t = $res->fetch_assoc()) {
+      while ($t = $res->fetch_assoc())
         $players[$i++] = User::getUser($t['user_id']);
-      }
       
-      if ($i < 1) return 10212;
+      if ($i < 1) return NULL;
 
       return $players;
     }
@@ -197,6 +198,52 @@
 
     public function equals(Tournament $tour) {
       return $this->id == $tour->getID();
+    }
+
+    public function printStatus() {
+      switch ($this->status) {
+        case TOUR_STATUS_NOT_STARTED:
+          return '<span class="label label-info">Not yet started</span>';
+
+        case TOUR_STATUS_PREPARED:
+          return '<span class="label">Preparing</span>';
+
+        case TOUR_STATUS_RUNNING:
+          return '<span class="label label-success">Running</span>';
+
+        case TOUR_STATUS_CLOSED:
+          return '<span class="label label-warning">Closed</span>';
+      }
+
+      return '<span class="label label-important">unrecognized status</span>';
+    }
+
+    public function printStart() {
+      switch ($this->status) {
+        case TOUR_STATUS_NOT_STARTED:
+          $date = date('D, d.m.Y H:i', strtotime($this->start));
+          return "<span class='label label-success'>$date</span>";
+
+        case TOUR_STATUS_CLOSED:
+          return '<span class="label label-important">Closed</span>';
+
+        default:
+          return '<span class="label label-info">Running</span>';
+      }
+
+      return '<span class="label label-important">unrecognized start date</span>';
+    }
+
+    public function isRegistered($user) {
+      if ($user == NULL)
+        return false;
+
+      if ($this->playerList == NULL)
+        return false;
+
+      foreach ($this->playerList as $p)
+        if ($p->equals($u))
+          return true;
     }
 
   }

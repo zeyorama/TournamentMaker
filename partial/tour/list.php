@@ -1,3 +1,4 @@
+<?php if ( $u != NULL ) { ?>
 <div class="box well">
   <li class="nav-header">Options</li>
   <a class="btn" href="index.php?f=tour&s=new">New tournament</a>
@@ -8,15 +9,16 @@
     </a>
     <ul class="dropdown-menu">
       <li><a href="index.php?f=tour&s=list" title="Really every tournament ever created">All Tournaments</a></li>
+      <li><a href="index.php?f=tour&s=list&fract=my" title="All created tournament by me">My Tournaments</a></li>
       <li><hr></li>
-      <li><a href="index.php?f=tour&s=list&fract=my" title="All created tournament by you">My Tournaments</a></li>
-      <li><span class="muted" style="padding-left: 5px; padding-right: 5px;">Tournaments you are registered in</span></li>
+      <li><span class="muted" style="padding-left: 5px; padding-right: 5px;">Tournaments I'm registered in</span></li>
       <li><a href="index.php?f=tour&s=list&fract=all" title="All tournaments I'm registered in and created">All of my Tournaments</a></li>
       <li><a href="index.php?f=tour&s=list&fract=up" title="All upcoming tournaments">Upcoming Tournaments</a></li>
       <li><a href="index.php?f=tour&s=list&fract=fin" title="All finished tournaments">Closed Tournaments</a></li>
     </ul>
   </div>
 </div>
+<?php } ?>
 <div class="box well">
 <?php
   if (isset($_GET['fract'])) {
