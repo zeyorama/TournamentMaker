@@ -29,7 +29,7 @@
       <div class="controls">
         <div class="input-prepend">
           <span class="add-on"><i class="icon-lock"></i></span>
-          <input type="password" id="inputPassword" placeholder="Password" name="user_pass" required>
+          <input type="password" id="inputPassword" placeholder="Password" name="user_pass" min-length="5" required>
         </div>
       </div>
     </div>

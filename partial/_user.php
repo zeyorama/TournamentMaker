@@ -30,6 +30,10 @@
         include 'user/setInGameNick.php';
         break;
 
+      case 'rP':
+        include 'user/resetPassword.php';
+        break;
+
       default:
         include '_index.php';
         break;

@@ -35,6 +35,10 @@
 
       10021 : get all tournaments query failed
       10022 : no tournaments found
+
+      10030 : old passwords not equal
+      10031 : update password failed
+      10032 : new password too short
       
       10098 : registration failed, query wrong or wrong values
       10099 : wrong register values
@@ -423,6 +427,35 @@
         return true;
 
       return false;
+    }
+
+    /**
+     * Set a new password for this user
+     *
+     * @param The hash with the old and the new password
+     *
+     * @return Error- or confirmationcode
+     */
+    public function resetPassword($POSTDATA) {
+      if ($POSTDATA['oldPass'] != $POSTDATA['oldPassRepeat'])
+        return 10030;
+
+      if (strlen($POSTDATA['newPass']) < USER_MIN_PASS_LENGTH)
+        return 10032;
+
+      $new = $POSTDATA['newPass'];
+
+      $db = new Mysqli(DB_HOST, DB_USER, DB_PASS, DB_SCHEMA);
+
+      if ($db->errno)
+        return 10001;
+
+      $query = "UPDATE `".USER_TABLE_NAME."` SET `".USER_COL_PASS."` = md5('$new') WHERE `".USER_COL_ID."`={$this->id};";
+
+      if (!$db->query($query))
+        return 10031;
+
+      return 10000;
     }
 
   }

@@ -29,6 +29,15 @@
               case 10017:
                 echo 'Empty game list.';
                 break;
+              case 10030:
+                echo 'Old passwords not equal, please try again.';
+                break;
+              case 10031:
+                echo 'Update password failed, please try again.';
+                break;
+              case 10032:
+                echo 'New password too short, choose a large one.';
+                break;
               case 10098:
                 echo 'Database error while registration, please retry!';
                 break;
@@ -127,6 +136,10 @@
 
               case 'user_game_del':
                 echo 'Game successfully removed from my list.';
+                break;
+
+              case 'user_reset_password':
+                echo 'Password successfully modified.';
                 break;
 
               case 'game_add':

@@ -12,12 +12,16 @@
 
 # -------------------------------------------------------------- #
   # user specific constants
+  define("USER_MIN_PASS_LENGTH", 5);
+
     # ROLES
   define("USER", 0);
   define("ADMIN", 1);
 
     # DB
   define("USER_TABLE_NAME", "_user");
+  define("USER_COL_ID", "_id");
+  define("USER_COL_PASS", "pass");
 
 # -------------------------------------------------------------- #
   # game specific constants

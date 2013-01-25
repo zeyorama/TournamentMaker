@@ -246,6 +246,22 @@
           return true;
     }
 
+    public function printGrid() {
+      switch ($this->gridType) {
+        case TOUR_TYPE_SINGLE_ELIMINATION:
+          echo 'Singleelimination';
+          break;
+
+        case TOUR_TYPE_DOUBLE_ELIMINATION:
+          echo 'Doubleelimination';
+          break;
+        
+        default:
+          echo 'unrecognized';
+          break;
+      }
+    }
+
   }
 
 ?>

@@ -15,6 +15,10 @@
             <td><?php echo $tour->name; ?></td>
           </tr>
           <tr>
+            <th>Game</th>
+            <td><?php echo $tour->getGame()->name; ?></td>
+          </tr>
+          <tr>
             <th>Created</th>
             <td><?php echo date("D, d.m.y", strtotime($tour->inserted)); ?></td>
           </tr>
@@ -27,8 +31,12 @@
             <td><?php echo $tour->printStatus(); ?></td>
           </tr>
           <tr>
-            <th></th>
-            <td></td>
+            <th>Max player count</th>
+            <td><?php echo $tour->maxPlayers; ?> Players</td>
+          </tr>
+          <tr>
+            <th>Bracket system</th>
+            <td><i><?php $tour->printGrid(); ?></i></td>
           </tr>
         </tbody>
       </table>
@@ -44,7 +52,8 @@
     </div>
     <div class="box-content">
       <ul class="nav">
-        <li><a href="">Edit</a></li>
+        <li><a href="">Edit tournament</a></li>
+        <li><a href="">Edit reglement</a></li>
         <li><hr></li>
 <?php if ($tour->status == TOUR_STATUS_NOT_STARTED) { ?>
         <li><a href="">Generate Grid</a></li>
@@ -76,7 +85,7 @@
         <li><hr></li>
 <?php } ?>
         <li><a href="">Players</a></li>
-        <li><a href="">Grid</a></li>
+        <li><a href="">Brackets</a></li>
         <li><hr></li>
         <li><a href="">Reglement</a></li>
         <li><a href="">Caster</a></li>
