@@ -33,6 +33,10 @@
     case 'bracket':
       include 'partial/tour/bracket.php';
       break;
+      
+    case 'players':
+      include 'partial/tour/players.php';
+      break;
 
     default:
       include 'partial/tour/list.php';
