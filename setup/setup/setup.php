@@ -30,6 +30,14 @@
       case 'createDB':
         include 'setup2.php';
         break;
+
+      case 'createAdmin':
+        include 'setup3.php';
+        break;
+
+      case 'finish':
+        include 'finish.php';
+        break;
       
       default:
         include 'setup1.php';

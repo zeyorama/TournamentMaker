@@ -10,15 +10,15 @@
       <div class="box-content well">
         <p>Type in an username and password for root user, who can create new users and databases.</p>
         <div class="control-group">
-          <label class="control-label" for="rootUsername">Root username</label>
+          <label class="control-label">Root username</label>
           <div class="controls">
-            <input name="rootUsername" class="input-text" type="text" id="rootUsername" required>
+            <input name="rootUsername" class="input-text" type="text" required>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="rootPassword">Root password</label>
+          <label class="control-label">Root password</label>
           <div class="controls">
-            <input name="rootPassword" class="input-password" type="password" id="rootPassword" required>
+            <input name="rootPassword" class="input-password" type="password" required>
           </div>
         </div>
       </div>
@@ -33,21 +33,21 @@
       <div class="box-content well">
         <p>Type in an username and password for root user, who can create new users and databases.</p>
         <div class="control-group">
-          <label class="control-label" for="rootUsername">Username</label>
+          <label class="control-label">Username</label>
           <div class="controls">
-            <input name="username" class="input-text" type="text" id="rootUsername" required><info>Username for user, who will be used by TournamentMaker for accessing the database.</info> 
+            <input name="username" class="input-text" type="text" required><info>Username for user, who will be used by TournamentMaker for accessing the database.</info> 
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="rootPassword">Password</label>
+          <label class="control-label">Password</label>
           <div class="controls">
-            <input name="password" class="input-password" type="password" id="rootPassword" required><info>Password for TournamentMaker to access database.</info>
+            <input name="password" class="input-password" type="password" required><info>Password for TournamentMaker to access database.</info>
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="rootDBName">Database</label>
+          <label class="control-label">Database</label>
           <div class="controls">
-            <input name="DBName" class="input-text" type="text" id="rootDBName" required><info>Name of the database, which will be used by TournamentMaker.</info>
+            <input name="DBName" class="input-text" type="text" required><info>Name of the database, which will be used by TournamentMaker.</info>
           </div>
         </div>
       </div>

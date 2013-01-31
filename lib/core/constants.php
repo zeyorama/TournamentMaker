@@ -2,13 +2,11 @@
   /**
    * @author Frank Kevin Zey
    */
-
   # DB
-  define("DB_HOST", "localhost");
-  define("DB_USER", "tournament");
-  define("DB_PASS", "yebREeJj85QhuFcM");
-  define("DB_SCHEMA", "tournament");
-
+  define("DB_HOST", 'localhost');
+  define("DB_USER", 'tournament');
+  define("DB_PASS", 'K3BGeDMaauLj4bYJ');
+  define("DB_SCHEMA", 'tournament');
 
 # -------------------------------------------------------------- #
   # user specific constants

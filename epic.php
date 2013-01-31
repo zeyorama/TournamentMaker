@@ -6,12 +6,6 @@
   # setting timezone
   date_default_timezone_set('Europe/Berlin');
 
-  if ( !file_exists("config.php") ) {
-    header("Location: setup.php");
-    exit();
-
-  }
-
   if (isset($_SESSION['user'])) {
     if (isset($_SESSION['LAST_ACTIVITY']) &&
         (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
