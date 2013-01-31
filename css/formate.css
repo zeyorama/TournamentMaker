@@ -14,3 +14,7 @@ input#datepicker {
 input#timepicker {
 	cursor: pointer;
 }
+
+span.tmwb_infobadget {
+  display: inline-block;
+}

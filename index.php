@@ -130,6 +130,6 @@
         </div>
       </div>
     </div>
-    <footer><center><?php printName();?> <?php printVersion(); ?><br>&copy; by Frank Kevin Zey <?php echo date("Y"); ?></center></footer>
+    <footer><center><?php printName();?> <?php printVersion(); ?><br>&copy; by <a href="mailto:fkz.dev@hotmail.de?subject=TournamentMaker">Frank Kevin Zey</a> 2012-<?php echo date("Y"); ?></center></footer>
   </body>
 </html>

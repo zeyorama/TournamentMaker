@@ -262,6 +262,22 @@
       }
     }
 
+    public function getNewRefereeRequestsCount() {
+      $c = 0;
+
+      # check
+
+      return $c;
+    }
+
+    public function getNewStreamRequestsCount() {
+      $c = 0;
+
+      # check
+
+      return $c;
+    }
+
   }
 
 ?>
