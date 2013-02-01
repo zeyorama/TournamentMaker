@@ -276,6 +276,7 @@
       
       $t = array();
       $i = 0;
+      $inside = false;
       while ($tz = $res2->fetch_assoc())
         $t[$i++] = Tournament::getTournament($tz['_id']);
 
@@ -283,9 +284,10 @@
         $thisTour = Tournament::getTournament($zt['tour_id']);
         
         foreach ($t as $tournament)
-          if ($tournament->equals($thisTour)) break;
+          if ($tournament->equals($thisTour)) { $inside = true; break; }
 
-        $t[$i++] = $thisTour;
+        if (!$inside)
+          $t[$i++] = $thisTour;
       }
 
       if ($i < 1) return 10022;

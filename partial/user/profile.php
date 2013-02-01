@@ -162,9 +162,9 @@
           if ($tour->status < 2) continue;
 ?>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><a href="index.php?f=tour&s=tournament&id=<?php echo $tour->getID(); ?>"><?php echo $tour->name; ?></a></td>
+              <td><?php echo $tour->getGame()->name; ?></td>
+              <td><?php echo date("d.m.y", strtotime($tour->start)); ?></td>
             </tr>
 <?php
         }
