@@ -185,9 +185,6 @@
 
       $this->games = $games;
 
-      unset($_SESSION['user']);
-      $_SESSION['user'] = serialize($this);
-
       return $this->games;
     }
 
