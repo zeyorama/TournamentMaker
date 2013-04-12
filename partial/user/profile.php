@@ -5,22 +5,17 @@
 ?>
 <?php
   $user = NULL;
-  $err = 0;
 
   if (isset($_GET['id'])) {
 
     $user = User::getUser($_GET['id']);
 
-    if (!($user instanceof User)) {
-      $err = $user;
-    }
-
-    switch ($err) {
+    switch ($user) {
       
       case 10001:
       case 10002:
       case 10004:
-        header("Location: index.php?e=$err");
+        header("Location: index.php?e=$user");
         exit();
       
     }
