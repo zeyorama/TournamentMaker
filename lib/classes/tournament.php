@@ -80,7 +80,7 @@
 
       if (!$db->query($query)) return 10202;
 
-      return 10200;
+      return array("ERRCODE"=>10200, "ID"=>($db->insert_id));
     }
 
     private function init($SQLResultHash) {
@@ -242,7 +242,7 @@
         return false;
 
       foreach ($this->playerList as $p)
-        if ($p->equals($u))
+        if ($p->equals($user))
           return true;
     }
 

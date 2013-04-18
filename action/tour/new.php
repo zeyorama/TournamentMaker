@@ -18,10 +18,16 @@
   $start = date("Y-m-d H:i:s", strtotime($_POST['tourStart'].' '.$_POST['tourTime'].':00'));
 
   $e = Tournament::newTournament($name, $start, $game, $maxPlayers, $grid);
+  
+  if (isset($e['ERRCODE']))
+    $c = $e['ERRCODE'];
 
-  switch ($e) {
+  else
+    $c = $e;
+
+  switch ($c) {
     case 10200:
-      header("Location: ../../index.php?f=tour&s=tournament&confirm=tour_new");
+      header("Location: ../../index.php?f=tour&s=tournament&id={$e['ID']}&confirm=tour_new");
       exit();
 
     default:

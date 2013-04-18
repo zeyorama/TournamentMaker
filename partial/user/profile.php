@@ -11,24 +11,27 @@
 
     $user = User::getUser($_GET['id']);
 
-    if (!($user instanceof User)) {
+    if (is_int($user)) {
       $err = $user;
-    }
 
-    switch ($err) {
-      
-      case 10001:
-      case 10002:
-      case 10004:
-        header("Location: index.php?e=$err");
-        exit();
-      
+      switch ($err) {
+        
+        case 10001:
+        case 10002:
+        case 10004:
+          header("Location: index.php?e=$err");
+          exit();
+        
+      }
     }
 
   } else {
-    if (!isset($u)) { header("Location: index.php"); exit(); }
-    $user = $u;
+    if ($u == NULL) {
+      header("Location: index.php");
+      exit();
+    }
 
+    $user = $u;
   }
 
 ?>
@@ -65,7 +68,7 @@
   $b = true;
   if (current_user() != NULL) {
     if (isset($_GET['id'])) {
-      $b = current_user()->getID()==$_GET['id'];
+      $b = current_user()->getID() == $_GET['id'];
     }
 
     if ($b) {

@@ -78,7 +78,7 @@
       if ($db->errno)
         return 10001;
 
-      $u = new User();
+      $mu = new User();
 
       if (!($res = $db->query("SELECT * FROM `_user` WHERE `username` LIKE '".$username."' AND `pass` LIKE md5('".$password."') LIMIT 1;")))
         return 10002;
@@ -88,18 +88,21 @@
       
       $user = $res->fetch_assoc();
 
-      $u->id = $user['_id'];
-      $u->username = $user['username'];
-      $u->email = $user['email'];
-      $u->role = $user['role'];
-      $u->created_at = $user['created_at'];
-      $u->updated_at = $user['updated_at'];
-      $u->last_signin = date("Y-m-d H:i:s");
+      $mu->id = $user['_id'];
+      $mu->username = $user['username'];
+      $mu->email = $user['email'];
+      $mu->role = $user['role'];
+      $mu->created_at = $user['created_at'];
+      $mu->updated_at = $user['updated_at'];
+      $mu->last_signin = date("Y-m-d H:i:s");
 
-      $_SESSION['user'] = serialize($u);
+      $time = date("Y-m-d H:i:s");
+      $mu->updateLastSignIn($db, $time);
+      $mu->last_signin = $time;
 
-      $u->updateLastSignIn($db, date("Y-m-d H:i:s"));
+      $_SESSION['user'] = serialize($mu);
 
+      unset($mu);
       $db->close();
 
       return 10000;
@@ -224,19 +227,19 @@
       if ($res->num_rows < 1)
         return 10004;
       
-      $u = new User();
+      $nu = new User();
 
       $user = $res->fetch_assoc();
 
-      $u->id = $user['_id'];
-      $u->username = $user['username'];
-      $u->email = $user['email'];
-      $u->role = $user['role'];
-      $u->created_at = $user['created_at'];
-      $u->updated_at = $user['updated_at'];
-      $u->last_signin = $user['last_signin'];
+      $nu->id = $user['_id'];
+      $nu->username = $user['username'];
+      $nu->email = $user['email'];
+      $nu->role = $user['role'];
+      $nu->created_at = $user['created_at'];
+      $nu->updated_at = $user['updated_at'];
+      $nu->last_signin = $user['last_signin'];
 
-      return $u;
+      return $nu;
     }
 
     /**
