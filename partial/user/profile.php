@@ -10,7 +10,6 @@
 
     $user = User::getUser($_GET['id']);
 
-<<<<<<< HEAD
     if (is_int($user)) {
       $err = $user;
 
@@ -23,16 +22,6 @@
           exit();
         
       }
-=======
-    switch ($user) {
-      
-      case 10001:
-      case 10002:
-      case 10004:
-        header("Location: index.php?e=$user");
-        exit();
-      
->>>>>>> c191e6e376f48e2fabefa91e64026ef282cf92a3
     }
 
   } else {
