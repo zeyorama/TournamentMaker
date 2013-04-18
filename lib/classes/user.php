@@ -78,7 +78,7 @@
       if ($db->errno)
         return 10001;
 
-      $mu = new User();
+      $user = new User();
 
       if (!($res = $db->query("SELECT * FROM `_user` WHERE `username` LIKE '".$username."' AND `pass` LIKE md5('".$password."') LIMIT 1;")))
         return 10002;
@@ -86,23 +86,20 @@
       if ($res->num_rows < 1)
         return 10003;
       
-      $user = $res->fetch_assoc();
+      $userHash = $res->fetch_assoc();
 
-      $mu->id = $user['_id'];
-      $mu->username = $user['username'];
-      $mu->email = $user['email'];
-      $mu->role = $user['role'];
-      $mu->created_at = $user['created_at'];
-      $mu->updated_at = $user['updated_at'];
-      $mu->last_signin = date("Y-m-d H:i:s");
+      $user->id = $userHash['_id'];
+      $user->username = $userHash['username'];
+      $user->email = $userHash['email'];
+      $user->role = $userHash['role'];
+      $user->created_at = $userHash['created_at'];
+      $user->updated_at = $userHash['updated_at'];
+      $user->last_signin = date("Y-m-d H:i:s");
 
-      $time = date("Y-m-d H:i:s");
-      $mu->updateLastSignIn($db, $time);
-      $mu->last_signin = $time;
+      $_SESSION['user'] = serialize($user);
 
-      $_SESSION['user'] = serialize($mu);
+      $user->updateLastSignIn($db, date("Y-m-d H:i:s"));
 
-      unset($mu);
       $db->close();
 
       return 10000;
@@ -187,9 +184,6 @@
       if (count($games) < 1) { $this->games == NULL; return 10012; }
 
       $this->games = $games;
-
-      unset($_SESSION['user']);
-      $_SESSION['user'] = serialize($this);
 
       return $this->games;
     }
