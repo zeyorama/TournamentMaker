@@ -7,6 +7,16 @@
 
 abstract class BasicError
 {
+	const NO_DB_CONNECTION  = 0xFFFFFFFF;
+	const DB_TIMEOUT        = 0xFFFFFFFE;
+
+	const NO_RESULT         = 0xEFFFFFFF;
+	const NO_OBJECT         = 0xEFFFFFFE;
+	const NO_NUMERIC_ID     = 0xEFFFFFFD;
+	const INVALID_GEN_QUERY = 0xEFFFFFFC;
+	const INVALID_RESULT    = 0xEFFFFFFB;
+#	const NO_RESULT         = 0xEFFFFFFA;
+	
 	protected $id;
 	
 	protected $errno;
@@ -53,5 +63,12 @@ abstract class BasicError
 		
 		return $error;
 	}
+	
+	/**
+	 * Returns if an error has occured.
+	 * 
+	 * @return boolean <i>true</i> if error occured, otherwise <i>false</i>.
+	 */
+	public function hasError()   { return $this->errno != 0; }
 }
 ?>

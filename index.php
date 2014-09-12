@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php include 'epic.php'; ?>
 <html lang="en">
 	<head>
