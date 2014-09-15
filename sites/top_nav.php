@@ -69,7 +69,7 @@ else # WENN KEIN USER ANGEMELDET IST !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title" id="LoginModalTitle">Register</h4>
       </div>
-      <form class="form-horizontal" role="form" method="POST" action="actions/session/register.php">
+      <form class="form-horizontal" role="form" method="POST" action="actions/user/register.php">
 	      <div class="modal-body">
 	        <div class="form-group">
 	        	<label class="control-label col-sm-2" for="userLogin">Username</label>

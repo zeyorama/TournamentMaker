@@ -17,6 +17,7 @@
 		<!-- js -->
 		<script type="text/javascript" src="js/jquery.1.11.1.js"></script>
 		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/alerts.js"></script>
 	</head>
 	<body>
 		<!-- Top Navigation -->
@@ -25,6 +26,7 @@
 		<!-- Content Pages -->
 		<div class="container-fluid">
 			<div class="row" id="MessageBox"></div>
+<?php include 'sites/alerts.php'; ?>
 			<!-- Main Content -->
 <?php
 if ($currentUser && FileExists('sites/' . $cat . '/' . $cat . '.php'))

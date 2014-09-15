@@ -8,6 +8,20 @@
 # Setze standard Zeitzone auf Europa/Berlin
 date_default_timezone_set('Europe/Berlin');
 
+if (session_id() === '')
+	session_start();
+else
+	session_regenerate_id();
+
+if (!isset($_SESSION['confirm']))
+	$_SESSION['confirm'] = array();
+
+if (!isset($_SESSION['error']))
+	$_SESSION['error'] = array();
+
+if (!isset($_SESSION['notice']))
+	$_SESSION['notice'] = array();
+
 $POST = false;
 $GET  = false;
 
