@@ -142,8 +142,6 @@ class User extends BasicError
 		return $user;
 	}
 	
-	
-	
 	private
 	function __loadForLogin($name, $pass)
 	{
