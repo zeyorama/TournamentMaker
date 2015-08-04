@@ -10,6 +10,5 @@ require_once 'helper.php';
 
 require_once 'classes/BasicError.php';
 require_once 'classes/Database.php';
-require_once 'classes/User.php';
 
 ?>

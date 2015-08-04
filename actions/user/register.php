@@ -1,3 +1,0 @@
-<?php
-#register actions here
-?>

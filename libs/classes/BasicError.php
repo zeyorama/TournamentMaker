@@ -1,11 +1,15 @@
 <?php
 /**
- * BasicError.php
+ * Base class for data views of datasets in databases.
  * 
- * @author: Frank Kevin Zey
+ * Version 1.0: 2015-08-04 fkzey
+ * 	- initial code
+ * 
+ * @abstract
+ * @author Frank Kevin Zey
  */
-
-abstract class BasicError
+abstract
+class BasicError
 {
 	const NO_DB_CONNECTION  = 0xFFFFFFFF;
 	const DB_TIMEOUT        = 0xFFFFFFFE;
@@ -15,7 +19,6 @@ abstract class BasicError
 	const NO_NUMERIC_ID     = 0xEFFFFFFD;
 	const INVALID_GEN_QUERY = 0xEFFFFFFC;
 	const INVALID_RESULT    = 0xEFFFFFFB;
-#	const NO_RESULT         = 0xEFFFFFFA;
 	
 	protected $id;
 	
@@ -23,12 +26,12 @@ abstract class BasicError
 	protected $error;
 	
 	public
-	function __construct($id)
+	function __construct( $id )
 	{
-		$this->id    = intval($id);
+		$this->id    = intval( $id );
 		
 		$this->errno = 0;
-		$this->error = 'no errors';
+		$this->error = 'No errors';
 	}
 	
 	/**
